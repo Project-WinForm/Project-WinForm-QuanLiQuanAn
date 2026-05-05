@@ -12,7 +12,7 @@ namespace projectWindowform.DAL
     {
         private DataProvider dp = new DataProvider();
 
-        public void AddFoodToBill(int billId, int foodId, int quantity)
+        public void AddFoodToBill(int billId, int foodId, int quantity) // Thêm món vào hóa đơn, nếu đã tồn tại thì cập nhật số lượng
         {
             string check = "SELECT Id, SoLuong FROM BillDetails WHERE BillId = @billId AND FoodId = @foodId";
             DataTable data = dp.ExecuteQuery(check, new object[] { billId, foodId });

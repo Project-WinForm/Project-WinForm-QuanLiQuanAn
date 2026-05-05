@@ -12,14 +12,14 @@ namespace projectWindowform.DAL
     {
         DataProvider dp = new DataProvider();
 
-        public int CreateBill(int tableId)
+        public int CreateBill(int tableId) // Tạo hóa đơn mới và trả về Id của hóa đơn đó
         {
             string query = "INSERT INTO Bill (TableId, DateCheckIn) VALUES (@tableId, GETDATE()); SELECT SCOPE_IDENTITY();";
             object result = dp.ExecuteScalar(query, new object[] { tableId });
             return Convert.ToInt32(result);
         }
 
-        public int GetBillByTableId(int tableId)
+        public int GetBillByTableId(int tableId) // Lấy Id của hóa đơn theo Id bàn
         {
             string query = "SELECT TOP 1 Id FROM Bill WHERE TableId = @tableId AND DateCheckOut IS NULL ORDER BY DateCheckIn DESC";
             object result = dp.ExecuteScalar(query, new object[] { tableId });
