@@ -26,7 +26,7 @@ namespace projectWindowform.DAL
             return result != null ? Convert.ToInt32(result) : -1;
         }
 
-        public void AddFoodToBill2(int billId, int foodId, int quantity)
+        public void AddFoodToBill2(int billId, int foodId, int quantity) // Cách thêm món vào hóa đơn mà không cần kiểm tra xem món đã tồn tại trong hóa đơn chưa
         {
             string query = "INSERT INTO BillInfo (BillId, FoodId, Quantity) VALUES (@billId, @foodId, @quantity)";
             dp.ExecuteNonQuery(query, new object[] { billId, foodId, quantity });
