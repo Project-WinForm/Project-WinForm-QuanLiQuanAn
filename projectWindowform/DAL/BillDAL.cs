@@ -76,7 +76,7 @@ namespace projectWindowform.DAL
             dp.ExecuteNonQuery(query, new object[] { billId });
         }
 
-        public void UpdateTotalBill(int billDetailsId)
+        public void UpdateTotalBill(int billDetailsId) // Cập nhật tổng tiền của hóa đơn sau khi thêm, sửa hoặc xóa chi tiết hóa đơn
         {
             string query = @"
                                 UPDATE Bills
@@ -89,7 +89,7 @@ namespace projectWindowform.DAL
             dp.ExecuteNonQuery(query, new object[] { billDetailsId });
         }
 
-        public void ApplyDiscount(int billId, decimal percent)
+        public void ApplyDiscount(int billId, decimal percent) // Áp dụng giảm giá cho hóa đơn, cập nhật tổng tiền sau khi giảm giá
         {
             string query = @"
                                 UPDATE Bills
