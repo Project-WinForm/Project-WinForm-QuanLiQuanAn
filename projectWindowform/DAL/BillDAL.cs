@@ -32,7 +32,7 @@ namespace projectWindowform.DAL
             dp.ExecuteNonQuery(query, new object[] { billId, foodId, quantity });
         }
 
-        public void AddFoodToBill(int billId, int foodId, int quantity)
+        public void AddFoodToBill(int billId, int foodId, int quantity) // Cách thêm món vào hóa đơn có kiểm tra xem món đã tồn tại trong hóa đơn chưa, nếu đã tồn tại thì cập nhật số lượng
         {
             string query = "SELECT Id, SoLuong FROM BillDetails WHERE BillId = @billId AND FoodId = @foodId";
 
@@ -53,7 +53,7 @@ namespace projectWindowform.DAL
             }
         }
 
-        public DataTable GetBillDetails(int billId)
+        public DataTable GetBillDetails(int billId) // Lấy chi tiết hóa đơn theo Id hóa đơn
         {
             string query = @"
                                 SELECT f.TenMon, bd.SoLuong, bd.DonGia, (bd.SoLuong * bd.DonGia) AS ThanhTien
@@ -63,7 +63,7 @@ namespace projectWindowform.DAL
             return dp.ExecuteQuery(query, new object[] { billId });
         }
 
-        public void CheckOut(int billId)
+        public void CheckOut(int billId) // Thanh toán hóa đơn
         {
             string query = @"
                                 UPDATE Bills SET TrangThai = 1, ThoiGianDong = GETDATE(),
