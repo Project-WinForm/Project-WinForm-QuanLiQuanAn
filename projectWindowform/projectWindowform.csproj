@@ -46,12 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\OrderBLL.cs" />
     <Compile Include="BLL\StaffBLL.cs" />
     <Compile Include="DAL\BillDAL.cs" />
     <Compile Include="DAL\BillDetailDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
     <Compile Include="DAL\DataProvider.cs" />
     <Compile Include="DAL\FoodDAL.cs" />
+    <Compile Include="DAL\OrderDAL.cs" />
     <Compile Include="DAL\StaffDAL.cs" />
     <Compile Include="DAL\TableDAL.cs" />
     <Compile Include="DTO\Bill.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="DTO\Category.cs" />
     <Compile Include="DTO\Discount.cs" />
     <Compile Include="DTO\Food.cs" />
+    <Compile Include="DTO\OrderItem.cs" />
     <Compile Include="DTO\Table.cs" />
     <Compile Include="GUI\Form1.cs">
       <SubType>Form</SubType>
