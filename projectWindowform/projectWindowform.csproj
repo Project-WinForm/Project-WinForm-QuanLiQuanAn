@@ -46,8 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BillBLL.cs" />
+    <Compile Include="BLL\BillDetailBLL.cs" />
+    <Compile Include="BLL\CategoryBLL.cs" />
+    <Compile Include="BLL\FoodBLL.cs" />
     <Compile Include="BLL\OrderBLL.cs" />
     <Compile Include="BLL\StaffBLL.cs" />
+    <Compile Include="BLL\TableBLL.cs" />
     <Compile Include="DAL\BillDAL.cs" />
     <Compile Include="DAL\BillDetailDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
