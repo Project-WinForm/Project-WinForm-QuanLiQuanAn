@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace projectWindowform
 {
-    internal class Staff
+    public class Staff
     {
         public int Id { get; set; }
         public string TenDangNhap { get; set; } = "";
         public string MatKhau { get; set; } = "";
         public string TenHienThi { get; set; } = "";
         public string VaiTro { get; set; } = "";
+        
     }
 }
