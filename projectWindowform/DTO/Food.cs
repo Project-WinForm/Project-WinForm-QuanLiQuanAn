@@ -14,5 +14,8 @@ namespace projectWindowform.DTO
         public int DanhMucId { get; set; }
         public string HinhAnh { get; set; } = "";
         public bool TrangThai { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
+        public string ImagePath { get; set; }
     }
 }
