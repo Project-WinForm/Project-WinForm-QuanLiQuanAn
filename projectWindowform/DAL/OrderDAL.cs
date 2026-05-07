@@ -48,6 +48,7 @@ namespace tieuluan.DAL
             if (_databaseOrders.ContainsKey(tableName))
             {
                 _databaseOrders[tableName].RemoveAll(x => x.FoodName == foodName);
+                // Nếu bàn trống thì xóa luôn bill khỏi database
                 if (_databaseOrders[tableName].Count == 0)
                 {
                     _databaseOrders.Remove(tableName);
@@ -66,6 +67,16 @@ namespace tieuluan.DAL
         public bool CheckOrderExists(string tableName)
         {
             return _databaseOrders.ContainsKey(tableName) && _databaseOrders[tableName].Count > 0;
+        }
+
+        // ==========================================
+        // HÀM MỚI BỔ SUNG: Đếm số lượng bàn có khách
+        // ==========================================
+        public int GetOccupiedTableCount()
+        {
+            // Do hàm DeleteFood và ClearTable đã dọn dẹp sạch các bàn trống
+            // Nên chỉ cần đếm số lượng key trong Dictionary là ra số bàn đang có khách
+            return _databaseOrders.Count;
         }
     }
 }

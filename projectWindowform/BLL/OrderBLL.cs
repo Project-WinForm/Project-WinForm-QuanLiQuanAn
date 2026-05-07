@@ -57,5 +57,18 @@ namespace tieuluan.BLL
         {
             return _orderDAL.CheckOrderExists(tableName);
         }
+
+        // 6. Đếm số lượng bàn đang có khách (Nhờ DAL đếm)
+        public int GetOccupiedTableCount()
+        {
+            return _orderDAL.GetOccupiedTableCount();
+        }
+
+        // 7. Đếm số lượng bàn trống
+        public int GetEmptyTableCount(int totalTables)
+        {
+            // Lấy tổng số bàn trừ đi số bàn đang có khách (lấy từ DAL)
+            return totalTables - _orderDAL.GetOccupiedTableCount();
+        }
     }
 }

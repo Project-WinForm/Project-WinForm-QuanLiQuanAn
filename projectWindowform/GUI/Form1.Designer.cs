@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lblBanTrong = new System.Windows.Forms.Label();
+            this.lblBanCoKhach = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.nmrSoluong = new System.Windows.Forms.NumericUpDown();
             this.btnThanhtoan = new System.Windows.Forms.Button();
@@ -40,15 +42,15 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.lblTong = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrSoluong)).BeginInit();
-            this.flowLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lblBanTrong);
+            this.panel1.Controls.Add(this.lblBanCoKhach);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.nmrSoluong);
             this.panel1.Controls.Add(this.btnThanhtoan);
@@ -59,6 +61,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1248, 100);
             this.panel1.TabIndex = 0;
+            // 
+            // lblBanTrong
+            // 
+            this.lblBanTrong.AutoSize = true;
+            this.lblBanTrong.Location = new System.Drawing.Point(37, 43);
+            this.lblBanTrong.Name = "lblBanTrong";
+            this.lblBanTrong.Size = new System.Drawing.Size(86, 16);
+            this.lblBanTrong.TabIndex = 6;
+            this.lblBanTrong.Text = "Số bàn trống:";
+            // 
+            // lblBanCoKhach
+            // 
+            this.lblBanCoKhach.AutoSize = true;
+            this.lblBanCoKhach.Location = new System.Drawing.Point(37, 18);
+            this.lblBanCoKhach.Name = "lblBanCoKhach";
+            this.lblBanCoKhach.Size = new System.Drawing.Size(110, 16);
+            this.lblBanCoKhach.TabIndex = 5;
+            this.lblBanCoKhach.Text = "Số bàn có khách:";
             // 
             // label1
             // 
@@ -123,10 +143,9 @@
             // flpThucdon
             // 
             this.flpThucdon.AutoScroll = true;
-            this.flpThucdon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpThucdon.Location = new System.Drawing.Point(238, 0);
             this.flpThucdon.Name = "flpThucdon";
-            this.flpThucdon.Size = new System.Drawing.Size(1010, 517);
+            this.flpThucdon.Size = new System.Drawing.Size(712, 517);
             this.flpThucdon.TabIndex = 2;
             // 
             // lsvHoadon
@@ -135,10 +154,11 @@
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6});
+            this.lsvHoadon.Dock = System.Windows.Forms.DockStyle.Right;
             this.lsvHoadon.HideSelection = false;
-            this.lsvHoadon.Location = new System.Drawing.Point(3, 3);
+            this.lsvHoadon.Location = new System.Drawing.Point(941, 0);
             this.lsvHoadon.Name = "lsvHoadon";
-            this.lsvHoadon.Size = new System.Drawing.Size(308, 400);
+            this.lsvHoadon.Size = new System.Drawing.Size(307, 517);
             this.lsvHoadon.TabIndex = 3;
             this.lsvHoadon.UseCompatibleStateImageBehavior = false;
             this.lsvHoadon.View = System.Windows.Forms.View.Details;
@@ -160,22 +180,13 @@
             this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader6.Width = 111;
             // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.Controls.Add(this.lsvHoadon);
-            this.flowLayoutPanel5.Controls.Add(this.lblTong);
-            this.flowLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(940, 0);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(308, 517);
-            this.flowLayoutPanel5.TabIndex = 3;
-            // 
             // lblTong
             // 
+            this.lblTong.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTong.AutoSize = true;
             this.lblTong.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTong.ForeColor = System.Drawing.Color.Red;
-            this.lblTong.Location = new System.Drawing.Point(3, 406);
+            this.lblTong.Location = new System.Drawing.Point(947, 479);
             this.lblTong.Name = "lblTong";
             this.lblTong.Size = new System.Drawing.Size(115, 25);
             this.lblTong.TabIndex = 4;
@@ -184,7 +195,8 @@
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1248, 617);
-            this.Controls.Add(this.flowLayoutPanel5);
+            this.Controls.Add(this.lblTong);
+            this.Controls.Add(this.lsvHoadon);
             this.Controls.Add(this.flpThucdon);
             this.Controls.Add(this.flpTables);
             this.Controls.Add(this.panel1);
@@ -192,9 +204,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrSoluong)).EndInit();
-            this.flowLayoutPanel5.ResumeLayout(false);
-            this.flowLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -217,7 +228,6 @@
         private System.Windows.Forms.FlowLayoutPanel flpTables;
         private System.Windows.Forms.FlowLayoutPanel flpThucdon;
         private System.Windows.Forms.ListView lsvHoadon;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown nmrSoluong;
         private System.Windows.Forms.Button btnThanhtoan;
@@ -227,6 +237,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.Label lblBanTrong;
+        private System.Windows.Forms.Label lblBanCoKhach;
     }
 }
 

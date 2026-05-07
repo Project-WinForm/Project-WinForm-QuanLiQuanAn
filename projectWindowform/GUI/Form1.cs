@@ -9,13 +9,13 @@ namespace projectWindowform
 {
     public partial class Form1 : Form
     {
+        private int totalTablesCount = 15;
         private Button _selectedTableBtn = null;
         private Button _selectedFoodBtn = null;
         private string _currentTableName = "";
         private string _currentFoodName = "";
         private int _currentFoodPrice = 0;
 
-        // Khởi tạo BLL thay vì Service
         private OrderBLL _orderBLL = new OrderBLL();
 
         public Form1()
@@ -28,12 +28,14 @@ namespace projectWindowform
 
             LoadTableList();
             LoadMenuList();
+            UpdateTableStatus();
         }
 
         private void LoadTableList()
         {
             flpTables.Controls.Clear();
-            for (int i = 1; i <= 15; i++)
+            // Sử dụng biến chung totalTablesCount
+            for (int i = 1; i <= totalTablesCount; i++)
             {
                 Button btnTable = new Button();
                 string tableName = "Bàn " + i;
@@ -49,10 +51,20 @@ namespace projectWindowform
             }
         }
 
+        private void UpdateTableStatus()
+        {
+            // Tự động lấy số lượng bàn đã khai báo ở đầu Class
+            int occupied = _orderBLL.GetOccupiedTableCount();
+            int empty = _orderBLL.GetEmptyTableCount(totalTablesCount);
+
+            lblBanCoKhach.Text = "Bàn có khách: " + occupied;
+            lblBanTrong.Text = "Bàn trống: " + empty;
+        }
+
+
         private void LoadMenuList()
         {
             flpThucdon.Controls.Clear();
-            // Data cứng về Menu (thực tế sau này có thể tách xuống DAL)
             var dookkiMenu = new Dictionary<string, int>()
             {
                 { "Vé Buffet Người Lớn", 139000 },
@@ -117,16 +129,13 @@ namespace projectWindowform
             }
 
             int quantity = (int)nmrSoluong.Value;
-
-            // Tầng GUI truyền dữ liệu xuống tầng BLL xử lý
             _orderBLL.AddFood(_currentTableName, _currentFoodName, _currentFoodPrice, quantity);
-
             _selectedTableBtn.Text = _currentTableName + Environment.NewLine + "(Có khách)";
             _selectedTableBtn.BackColor = Color.LightGreen;
 
             ShowBill(_currentTableName);
+            UpdateTableStatus();
             nmrSoluong.Value = 1;
-
         }
 
         private void btnRemove_Click(object sender, EventArgs e)
@@ -134,8 +143,6 @@ namespace projectWindowform
             if (lsvHoadon.SelectedItems.Count > 0)
             {
                 string foodName = lsvHoadon.SelectedItems[0].Text;
-
-                // Tầng GUI truyền yêu cầu xóa xuống BLL
                 _orderBLL.RemoveFood(_currentTableName, foodName);
 
                 if (!_orderBLL.HasOrder(_currentTableName))
@@ -145,12 +152,12 @@ namespace projectWindowform
                 }
 
                 ShowBill(_currentTableName);
+                UpdateTableStatus();
             }
             else
             {
                 MessageBox.Show("Vui lòng chọn một món trên hóa đơn để xóa!", "Thông báo");
             }
-
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)
@@ -159,24 +166,20 @@ namespace projectWindowform
 
             if (MessageBox.Show($"Thanh toán cho {_currentTableName}?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                // Gọi BLL dọn bàn
                 _orderBLL.Checkout(_currentTableName);
-
                 _selectedTableBtn.Text = _currentTableName + Environment.NewLine + "(Trống)";
                 _selectedTableBtn.BackColor = Color.LightSkyBlue;
 
                 ShowBill(_currentTableName);
+                UpdateTableStatus();
                 MessageBox.Show("Thanh toán thành công!");
             }
-
         }
 
         private void ShowBill(string tableName)
         {
             lsvHoadon.Items.Clear();
             int totalAmount = 0;
-
-            // GUI yêu cầu BLL lấy dữ liệu
             List<OrderItem> currentBill = _orderBLL.GetBill(tableName);
 
             foreach (var item in currentBill)
@@ -184,11 +187,9 @@ namespace projectWindowform
                 ListViewItem lsvItem = new ListViewItem(item.FoodName);
                 lsvItem.SubItems.Add(item.Quantity.ToString());
                 lsvItem.SubItems.Add(item.Total.ToString("N0"));
-
                 lsvHoadon.Items.Add(lsvItem);
                 totalAmount += item.Total;
             }
-
             lblTong.Text = "Tổng tiền: " + totalAmount.ToString("N0") + " VNĐ";
         }
     }
