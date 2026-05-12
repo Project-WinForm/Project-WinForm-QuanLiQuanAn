@@ -38,6 +38,7 @@ namespace projectWindowform.GUI
         private void button1_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Form3());
+            label1.Text = " Staff Management ";
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -46,6 +47,7 @@ namespace projectWindowform.GUI
             {
                 currentFormChild.Close();
             }
+            label1.Text = "Form Main ";
         }
 
         private void panel_Top_Paint(object sender, PaintEventArgs e)
@@ -56,8 +58,13 @@ namespace projectWindowform.GUI
         private void button2_Click(object sender, EventArgs e)
         {
             OpenChildForm( new Form5() );
+            label1.Text = " Food Management ";
         }
 
-
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenChildForm( new Form6() );
+            label1.Text = "StatisticForm";
+        }
     }
 }

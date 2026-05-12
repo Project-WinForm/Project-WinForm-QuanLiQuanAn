@@ -35,8 +35,10 @@
             this.panel_Body = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.panelLeft.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel_Top.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelLeft
@@ -76,19 +78,21 @@
             // 
             // panel_Top
             // 
+            this.panel_Top.BackColor = System.Drawing.Color.Navy;
+            this.panel_Top.Controls.Add(this.label1);
             this.panel_Top.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel_Top.Location = new System.Drawing.Point(167, 0);
             this.panel_Top.Name = "panel_Top";
-            this.panel_Top.Size = new System.Drawing.Size(1289, 85);
+            this.panel_Top.Size = new System.Drawing.Size(1289, 110);
             this.panel_Top.TabIndex = 1;
             this.panel_Top.Paint += new System.Windows.Forms.PaintEventHandler(this.panel_Top_Paint);
             // 
             // panel_Body
             // 
             this.panel_Body.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel_Body.Location = new System.Drawing.Point(167, 85);
+            this.panel_Body.Location = new System.Drawing.Point(167, 110);
             this.panel_Body.Name = "panel_Body";
-            this.panel_Body.Size = new System.Drawing.Size(1289, 499);
+            this.panel_Body.Size = new System.Drawing.Size(1289, 474);
             this.panel_Body.TabIndex = 2;
             // 
             // button2
@@ -113,6 +117,18 @@
             this.button3.TabIndex = 3;
             this.button3.Text = "Chart Statistics";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label1.Location = new System.Drawing.Point(517, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(246, 54);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Form main";
             // 
             // Form2
             // 
@@ -126,6 +142,8 @@
             this.Text = "Form2";
             this.panelLeft.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel_Top.ResumeLayout(false);
+            this.panel_Top.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -139,5 +157,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label1;
     }
 }
