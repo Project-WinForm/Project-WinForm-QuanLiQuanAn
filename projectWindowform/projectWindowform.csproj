@@ -113,8 +113,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Content Include="Images\1.png" />
-    <Content Include="Images\2.png" />
+    <Content Include="Images\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\a.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
