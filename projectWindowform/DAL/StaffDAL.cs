@@ -35,8 +35,8 @@ namespace projectWindowform.DAL
         public bool InsertStaff(string tenDangNhap, string matKhau, string tenHienThi, string vaiTro)
         {
             string query = @"
-        INSERT INTO Staff(TenDangNhap, MatKhau, TenHienThi, VaiTro)
-        VALUES(@user, @pass, @display, @role)";
+        INSERT INTO Staff( TenDangNhap , MatKhau , TenHienThi , VaiTro )
+        VALUES( @user , @pass , @display , @role )";
 
             int result = dp.ExecuteNonQuery(query,
                 new object[]
@@ -52,11 +52,7 @@ namespace projectWindowform.DAL
 
         public bool UpdateStaff(int id, string tenHienThi, string vaiTro)
         {
-            string query = @"
-        UPDATE Staff
-        SET TenHienThi = @display,
-            VaiTro = @role
-        WHERE Id = @id";
+            string query = @" UPDATE Staff SET TenHienThi = @display , VaiTro = @role WHERE Id = @id";
 
             int result = dp.ExecuteNonQuery(query,
                 new object[]
