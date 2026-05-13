@@ -15,7 +15,7 @@ namespace projectWindowform.DAL
         public List<Food> GetFoods()
         {
             List<Food> foods = new List<Food>();
-            string query = "SELECT * FROM Foods";
+            string query = "SELECT f.Id , f.TenMon , f.Gia , f.DanhMucId , f.TrangThai , c.TenDanhMuc FROM Foods f INNER JOIN Categories c ON f.DanhMucId = c.Id";
             DataTable dataTable = dp.ExecuteQuery(query);
             foreach (DataRow row in dataTable.Rows)
             {
@@ -25,8 +25,9 @@ namespace projectWindowform.DAL
                     TenMon = row["TenMon"].ToString(),
                     Gia = Convert.ToDecimal(row["Gia"]),
                     DanhMucId = Convert.ToInt32(row["DanhMucId"]),
-                    HinhAnh = row["HinhAnh"].ToString(),
+                    TenDanhMuc = row["TenDanhMuc"].ToString(),
                     TrangThai = Convert.ToBoolean(row["TrangThai"])
+
                 };
                 foods.Add(food);
             }
@@ -35,14 +36,14 @@ namespace projectWindowform.DAL
 
         public bool Insert(string tenMon, decimal gia, int danhMucId, string hinhAnh, bool trangThai)
         {
-                string query = "INSERT INTO Foods (TenMon, Gia, DanhMucId, HinhAnh, TrangThai) VALUES (@tenMon, @gia, @danhMucId, @hinhAnh, @trangThai)";
-                int result = dp.ExecuteNonQuery(query, new object[] { tenMon, gia, danhMucId, hinhAnh, trangThai });
+                string query = "INSERT INTO Foods (TenMon , Gia , DanhMucId , HinhAnh , TrangThai ) VALUES ( @tenMon , @gia , @danhMucId , @hinhAnh , @trangThai )";
+                int result = dp.ExecuteNonQuery(query, new object[] { tenMon , gia , danhMucId , hinhAnh , trangThai });
                 return result > 0;
         }
 
         public bool Update(int id, string tenMon, decimal gia, int danhMucId, string hinhAnh, bool trangThai)
         {
-            string query = "UPDATE Foods SET TenMon = @tenMon, Gia = @gia, DanhMucId = @danhMucId, HinhAnh = @hinhAnh, TrangThai = @trangThai WHERE Id = @id";
+            string query = "UPDATE Foods SET TenMon = @tenMon , Gia = @gia , DanhMucId = @danhMucId , HinhAnh = @hinhAnh , TrangThai = @trangThai WHERE Id = @id";
             int result = dp.ExecuteNonQuery(query, new object[] { tenMon, gia, danhMucId, hinhAnh, trangThai, id });
             return result > 0;
         }
@@ -75,5 +76,28 @@ namespace projectWindowform.DAL
             return foods;
         }
 
+        public List<Food> SearchFoodByName(string name)
+        {
+            List<Food> foods = new List<Food>();
+            // Dùng LIKE để tìm kiếm chứa từ khóa, thêm N để hỗ trợ tiếng Việt
+            string query = string.Format("SELECT f.*, c.TenDanhMuc FROM Foods f INNER JOIN Categories c ON f.DanhMucId = c.Id WHERE f.TenMon LIKE N'%{0}%'", name);
+
+            DataTable dataTable = dp.ExecuteQuery(query);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                Food food = new Food
+                {
+                    Id = Convert.ToInt32(row["Id"]),
+                    TenMon = row["TenMon"].ToString(),
+                    Gia = Convert.ToDecimal(row["Gia"]),
+                    DanhMucId = Convert.ToInt32(row["DanhMucId"]),
+                    TenDanhMuc = row["TenDanhMuc"].ToString(),
+                    HinhAnh = row["HinhAnh"].ToString(),
+                    TrangThai = Convert.ToBoolean(row["TrangThai"])
+                };
+                foods.Add(food);
+            }
+            return foods;
+        }
     }
 }

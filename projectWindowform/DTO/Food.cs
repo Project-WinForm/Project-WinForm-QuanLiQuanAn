@@ -17,5 +17,11 @@ namespace projectWindowform.DTO
         public string Name { get; set; }
         public int Price { get; set; }
         public string ImagePath { get; set; }
+        public string TrangThaiHienThi
+        {
+            get { return TrangThai ? "Còn bán" : "Hết bán"; }
+            
+        }
+        public string TenDanhMuc { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace projectWindowform.DAL
         public List<Category> GetCategories()
         {
             List<Category> categories = new List<Category>();
-            string query = "SELECT * FROM Category";
+            string query = "SELECT * FROM Categories";
             DataTable data = dp.ExecuteQuery(query);
 
             foreach (DataRow row in data.Rows)
@@ -22,7 +22,7 @@ namespace projectWindowform.DAL
                 Category category = new Category
                 {
                     Id = Convert.ToInt32(row["Id"]),
-                    TenDanhMuc = row["Name"].ToString()
+                    TenDanhMuc = row["TenDanhMuc"].ToString()
                 };
 
                 categories.Add(category);
@@ -33,21 +33,21 @@ namespace projectWindowform.DAL
 
         public bool Insert(string tenDanhMuc)
         {
-            string query = "INSERT INTO Category (Name) VALUES (@tenDanhMuc)";
+            string query = "INSERT INTO Categories (TenDanhMuc) VALUES (@tenDanhMuc)";
             int result = dp.ExecuteNonQuery(query, new object[] { tenDanhMuc });
             return result > 0;
         }
 
         public bool Update(int id, string tenDanhMuc)
         {
-            string query = "UPDATE Category SET Name = @tenDanhMuc WHERE Id = @id";
+            string query = "UPDATE Categories SET TenDanhMuc = @tenDanhMuc WHERE Id = @id";
             int result = dp.ExecuteNonQuery(query, new object[] { tenDanhMuc, id });
             return result > 0;
         }
 
         public bool Delete(int id)
         {
-            string query = "DELETE FROM Category WHERE Id = @id";
+            string query = "DELETE FROM Categories WHERE Id = @id";
             int result = dp.ExecuteNonQuery(query, new object[] { id });
             return result > 0;
         }
