@@ -1,6 +1,6 @@
 -- Thêm dữ liệu món ăn Hàn Quốc vào bảng dbo.Foods
 INSERT INTO dbo.Categories (TenDanhMuc)
-VALUES (N'Món cơm'), (N'Món mì'), (N'Món nướng'), (N'Món canh');
+VALUES (N'Món cơm'), (N'Món mì'), (N'Món nướng'), (N'Món canh') , (N'Món chiên');
 go
 INSERT INTO dbo.Foods (TenMon, Gia, DanhMucId, HinhAnh, TrangThai)
 VALUES 

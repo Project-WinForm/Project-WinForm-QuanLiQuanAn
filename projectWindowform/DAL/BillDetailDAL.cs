@@ -14,7 +14,7 @@ namespace projectWindowform.DAL
 
         public void AddFoodToBill(int billId, int foodId, int quantity) // Thêm món vào hóa đơn, nếu đã tồn tại thì cập nhật số lượng
         {
-            string check = "SELECT Id, SoLuong FROM BillDetails WHERE BillId = @billId AND FoodId = @foodId";
+            string check = "SELECT Id , SoLuong FROM BillDetails WHERE BillId = @billId AND FoodId = @foodId";
             DataTable data = dp.ExecuteQuery(check, new object[] { billId, foodId });
 
             if (data.Rows.Count > 0)
@@ -28,8 +28,8 @@ namespace projectWindowform.DAL
             else
             {
                 string insert = @"
-            INSERT INTO BillDetails(BillId, FoodId, SoLuong, DonGia)
-            VALUES (@billId, @foodId, @qty, (SELECT Gia FROM Foods WHERE Id = @foodId))";
+            INSERT INTO BillDetails( BillId , FoodId , SoLuong , DonGia )
+            VALUES ( @billId , @foodId , @qty , ( SELECT Gia FROM Foods WHERE Id = @foodId))";
 
                 dp.ExecuteNonQuery(insert, new object[] { billId, foodId, quantity });
             }

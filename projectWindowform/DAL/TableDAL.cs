@@ -15,7 +15,7 @@ namespace projectWindowform.DAL
         public List<Table> GetTables()
         {
             List<Table> tables = new List<Table>();
-            string query = "SELECT * FROM [Table]";
+            string query = "SELECT * FROM [Tables]";
             DataTable dataTable = dp.ExecuteQuery(query);
             foreach (DataRow row in dataTable.Rows)
             {
@@ -32,21 +32,21 @@ namespace projectWindowform.DAL
 
         public bool Insert(string tenBan, string trangThai)
         {
-            string query = "INSERT INTO [Table] (TenBan, TrangThai) VALUES (@tenBan, @trangThai)";
+            string query = "INSERT INTO [Tables] ( TenBan, TrangThai ) VALUES ( @tenBan, @trangThai )";
             int result = dp.ExecuteNonQuery(query, new object[] { tenBan, trangThai });
             return result > 0;
         }
 
         public bool Update(int id, string tenBan, string trangThai)
         {
-            string query = "UPDATE [Table] SET TenBan = @tenBan, TrangThai = @trangThai WHERE Id = @id";
+            string query = "UPDATE [Tables] SET TenBan = @tenBan, TrangThai = @trangThai WHERE Id = @id";
             int result = dp.ExecuteNonQuery(query, new object[] { tenBan, trangThai, id });
             return result > 0;
         }
 
         public bool Delete(int id)
         {
-            string query = "DELETE FROM [Table] WHERE Id = @id";
+            string query = "DELETE FROM [Tables] WHERE Id = @id";
             int result = dp.ExecuteNonQuery(query, new object[] { id });
             return result > 0;
         }

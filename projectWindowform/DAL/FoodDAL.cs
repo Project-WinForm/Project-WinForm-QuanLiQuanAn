@@ -99,5 +99,11 @@ namespace projectWindowform.DAL
             }
             return foods;
         }
+        public int GetFoodIdByName(string tenMon)
+        {
+            string query = "SELECT Id FROM Foods WHERE TenMon = @TenMon";
+            object result = dp.ExecuteScalar(query, new object[] { tenMon });
+            return result != null ? (int)result : 0;
+        }
     }
 }

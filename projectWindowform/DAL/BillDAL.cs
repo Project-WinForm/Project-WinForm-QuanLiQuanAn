@@ -14,7 +14,7 @@ namespace projectWindowform.DAL
 
         public int CreateBill(int tableId) // Tạo hóa đơn mới và trả về Id của hóa đơn đó
         {
-            string query = "INSERT INTO Bill (TableId, DateCheckIn) VALUES (@tableId, GETDATE()); SELECT SCOPE_IDENTITY();";
+            string query = "INSERT INTO Bill (TableId, DateCheckIn) VALUES ( @tableId , GETDATE()); SELECT SCOPE_IDENTITY();";
             object result = dp.ExecuteScalar(query, new object[] { tableId });
             return Convert.ToInt32(result);
         }
@@ -28,13 +28,13 @@ namespace projectWindowform.DAL
 
         public void AddFoodToBill2(int billId, int foodId, int quantity) // Cách thêm món vào hóa đơn mà không cần kiểm tra xem món đã tồn tại trong hóa đơn chưa
         {
-            string query = "INSERT INTO BillInfo (BillId, FoodId, Quantity) VALUES (@billId, @foodId, @quantity)";
+            string query = "INSERT INTO BillInfo ( BillId , FoodId , Quantity ) VALUES ( @billId , @foodId , @quantity )";
             dp.ExecuteNonQuery(query, new object[] { billId, foodId, quantity });
         }
 
         public void AddFoodToBill(int billId, int foodId, int quantity) // Cách thêm món vào hóa đơn có kiểm tra xem món đã tồn tại trong hóa đơn chưa, nếu đã tồn tại thì cập nhật số lượng
         {
-            string query = "SELECT Id, SoLuong FROM BillDetails WHERE BillId = @billId AND FoodId = @foodId";
+            string query = "SELECT Id , SoLuong FROM BillDetails WHERE BillId = @billId AND FoodId = @foodId ";
 
             DataTable data = dp.ExecuteQuery(query, new object[] { billId, foodId });
 
@@ -48,7 +48,7 @@ namespace projectWindowform.DAL
             }
             else
             {
-                string insertQuery = "INSERT INTO BillDetails (BillId, FoodId, SoLuong) VALUES (@billId, @foodId, @quantity)";
+                string insertQuery = "INSERT INTO BillDetails ( BillId , FoodId , SoLuong ) VALUES ( @billId , @foodId , @quantity )";
                 dp.ExecuteNonQuery(insertQuery, new object[] { billId, foodId, quantity });
             }
         }
@@ -56,7 +56,7 @@ namespace projectWindowform.DAL
         public DataTable GetBillDetails(int billId) // Lấy chi tiết hóa đơn theo Id hóa đơn
         {
             string query = @"
-                                SELECT f.TenMon, bd.SoLuong, bd.DonGia, (bd.SoLuong * bd.DonGia) AS ThanhTien
+                                SELECT f.TenMon , bd.SoLuong , bd.DonGia , ( bd.SoLuong * bd.DonGia )  AS ThanhTien
                                 FROM BillDetails bd
                                 JOIN Foods f ON bd.FoodId = f.Id
                                 WHERE bd.BillId = @billId";
@@ -93,10 +93,42 @@ namespace projectWindowform.DAL
         {
             string query = @"
                                 UPDATE Bills
-                                SET TongTien = TongTien - (TongTien * @percent / 100)
-                                WHERE Id = @billId";
+                                SET TongTien = TongTien - ( TongTien * @percent / 100 )
+                                WHERE Id = @billId ";
 
             dp.ExecuteNonQuery(query, new object[] { percent, billId });
+        }
+
+        public void SaveBill(Bill bill, List<BillDetail> details)
+        {
+            // Bước 1: Insert Bill, lấy lại Id vừa tạo
+            string sqlBill = @"INSERT INTO Bills ( TableId , ThoiGianMo , ThoiGianDong , TongTien , TrangThai )
+                                VALUES ( @TableId , @ThoiGianMo , @ThoiGianDong , @TongTien , @TrangThai );
+                                SELECT SCOPE_IDENTITY();";
+
+            int billId = (int)(decimal)dp.ExecuteScalar(sqlBill, new object[]
+            {
+                bill.TableId,
+                bill.ThoiGianMo,
+                bill.ThoiGianDong,
+                bill.TongTien,
+                bill.TrangThai
+            });
+
+            // Bước 2: Insert từng BillDetail
+            string sqlDetail = @"INSERT INTO BillDetails ( BillId , FoodId , SoLuong , DonGia )
+                                  VALUES ( @BillId , @FoodId , @SoLuong , @DonGia )";
+
+            foreach (var d in details)
+            {
+                dp.ExecuteNonQuery(sqlDetail, new object[]
+                {
+                    billId,
+                    d.FoodId,
+                    d.SoLuong,
+                    d.DonGia
+                });
+            }
         }
     }
 }

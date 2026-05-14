@@ -1,82 +1,75 @@
-﻿using System.Collections.Generic;
+﻿using projectWindowform.DAL;
+using System.Collections.Generic;
+using System.Data;
 using tieuluan.DTO;
 
 namespace tieuluan.DAL
 {
     public class OrderDAL
     {
-        // Biến static đóng vai trò như Database lưu trữ dữ liệu các bàn
-        private static Dictionary<string, List<OrderItem>> _databaseOrders = new Dictionary<string, List<OrderItem>>();
+        private DataProvider _db = new DataProvider();
 
         public List<OrderItem> GetOrders(string tableName)
         {
-            if (_databaseOrders.ContainsKey(tableName))
+            var result = new List<OrderItem>();
+            string query = "SELECT FoodName , Price , Quantity FROM Orders WHERE TableName = @TableName ";
+            DataTable dt = _db.ExecuteQuery(query, new object[] { tableName });
+
+            foreach (DataRow row in dt.Rows)
             {
-                return _databaseOrders[tableName];
+                result.Add(new OrderItem
+                {
+                    FoodName = row["FoodName"].ToString(),
+                    Price = (int)row["Price"],
+                    Quantity = (int)row["Quantity"]
+                });
             }
-            return new List<OrderItem>();
+            return result;
         }
 
         public void EnsureTableExists(string tableName)
         {
-            if (!_databaseOrders.ContainsKey(tableName))
-            {
-                _databaseOrders[tableName] = new List<OrderItem>();
-            }
+            // Không cần nữa vì SQL Server tự quản lý
+            // Có thể để trống hoặc xóa
         }
 
         public void InsertFood(string tableName, OrderItem item)
         {
-            _databaseOrders[tableName].Add(item);
+            string query = "INSERT INTO Orders ( TableName , FoodName , Price , Quantity ) " +
+                           "VALUES ( @TableName , @FoodName , @Price , @Quantity )";
+            _db.ExecuteNonQuery(query, new object[] { tableName, item.FoodName, item.Price, item.Quantity });
         }
 
         public void UpdateQuantity(string tableName, string foodName, int additionalQuantity)
         {
-            var currentBill = _databaseOrders[tableName];
-            foreach (var item in currentBill)
-            {
-                if (item.FoodName == foodName)
-                {
-                    item.Quantity += additionalQuantity;
-                    break;
-                }
-            }
+            string query = "UPDATE Orders SET Quantity = Quantity + @additionalQuantity " +
+                           "WHERE TableName = @TableName AND FoodName = @FoodName";
+            _db.ExecuteNonQuery(query, new object[] { additionalQuantity, tableName, foodName });
         }
 
         public void DeleteFood(string tableName, string foodName)
         {
-            if (_databaseOrders.ContainsKey(tableName))
-            {
-                _databaseOrders[tableName].RemoveAll(x => x.FoodName == foodName);
-                // Nếu bàn trống thì xóa luôn bill khỏi database
-                if (_databaseOrders[tableName].Count == 0)
-                {
-                    _databaseOrders.Remove(tableName);
-                }
-            }
+            string query = "DELETE FROM Orders WHERE TableName = @TableName AND FoodName = @FoodName";
+            _db.ExecuteNonQuery(query, new object[] { tableName, foodName });
         }
 
         public void ClearTable(string tableName)
         {
-            if (_databaseOrders.ContainsKey(tableName))
-            {
-                _databaseOrders.Remove(tableName);
-            }
+            string query = "DELETE FROM Orders WHERE TableName = @TableName";
+            _db.ExecuteNonQuery(query, new object[] { tableName });
         }
 
         public bool CheckOrderExists(string tableName)
         {
-            return _databaseOrders.ContainsKey(tableName) && _databaseOrders[tableName].Count > 0;
+            string query = "SELECT COUNT(*) FROM Orders WHERE TableName = @TableName";
+            int count = (int)_db.ExecuteScalar(query, new object[] { tableName });
+            return count > 0;
         }
 
-        // ==========================================
-        // HÀM MỚI BỔ SUNG: Đếm số lượng bàn có khách
-        // ==========================================
         public int GetOccupiedTableCount()
         {
-            // Do hàm DeleteFood và ClearTable đã dọn dẹp sạch các bàn trống
-            // Nên chỉ cần đếm số lượng key trong Dictionary là ra số bàn đang có khách
-            return _databaseOrders.Count;
+            string query = "SELECT COUNT(DISTINCT TableName) FROM Orders";
+            return (int)_db.ExecuteScalar(query, null);
         }
     }
 }

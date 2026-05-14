@@ -1,4 +1,5 @@
-﻿using projectWindowform.DTO;
+﻿using projectWindowform.BLL;
+using projectWindowform.DTO;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,9 +17,12 @@ namespace projectWindowform
         private string _currentTableName = "";
         private string _currentFoodName = "";
         private int _currentFoodPrice = 0;
+        private int _currentTableId = 0;
 
         private OrderBLL _orderBLL = new OrderBLL();
         private List<OrderItem> _temporarySelectedFoods = new List<OrderItem>();
+        private FoodBLL _foodBLL = new FoodBLL();
+        private TableBLL _tableBLL = new TableBLL();
 
         public Form1()
         {
@@ -36,21 +40,23 @@ namespace projectWindowform
         private void LoadTableList()
         {
             flpTables.Controls.Clear();
-            // Sử dụng biến chung totalTablesCount
-            for (int i = 1; i <= totalTablesCount; i++)
+
+            var tables = _tableBLL.GetTables(); // load từ DB
+
+            foreach (var table in tables)
             {
                 Button btnTable = new Button();
-                string tableName = "Bàn " + i;
-                btnTable.Text = tableName + Environment.NewLine + "(Trống)";
+                btnTable.Text = table.TenBan + Environment.NewLine + "(Trống)";
                 btnTable.Width = 90;
                 btnTable.Height = 90;
                 btnTable.BackColor = Color.LightGray;
                 btnTable.FlatStyle = FlatStyle.Flat;
                 btnTable.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-                btnTable.Tag = tableName;
+                btnTable.Tag = table;   // ← gán cả object Table
                 btnTable.Click += BtnTable_Click;
                 flpTables.Controls.Add(btnTable);
             }
+            totalTablesCount = tables.Count;
         }
 
         private void UpdateTableStatus()
@@ -67,35 +73,28 @@ namespace projectWindowform
         private void LoadMenuList()
         {
             flpThucdon.Controls.Clear();
-            var dookkiMenu = new List<Food>()
-    {
-        new Food { Name = "Vé Buffet Người Lớn", Price = 139000, ImagePath = @"Images\1.png" },
-        new Food { Name = "Vé Buffet Trẻ Em", Price = 69000, ImagePath = @"Images\2.png" },
-        new Food { Name = "Viền phô mai", Price = 69000, ImagePath = @"Images\a.png" },
-        new Food { Name = "Phô mai hoa tuyết", Price = 49000, ImagePath = @"Images\b.png" },
-        new Food { Name = "Thịt bò cuộn", Price = 49000, ImagePath = @"Images\c.png" },
-        new Food {Name = "Nước ngọt", Price = 29000, ImagePath = @"Images\d.png"},  
-    };
 
-            foreach (var item in dookkiMenu)
+            // Load từ DB thay vì hardcode
+            var foods = _foodBLL.GetFoods(); // cần viết FoodBLL + FoodDAL
+
+            foreach (var item in foods)
             {
                 Button btnFood = new Button();
-                btnFood.Text = item.Name + Environment.NewLine + item.Price.ToString("N0") + "đ";
+                btnFood.Text = item.TenMon + Environment.NewLine
+                             + item.Gia.ToString("N0") + "đ";
                 btnFood.Width = 150;
                 btnFood.Height = 140;
                 btnFood.BackColor = Color.White;
                 btnFood.FlatStyle = FlatStyle.Flat;
                 btnFood.Font = new Font("Segoe UI", 9, FontStyle.Bold);
 
-                // --- BẮT ĐẦU CẢI TIẾN BƯỚC 3 Ở ĐÂY ---
+                // Load ảnh như cũ
                 try
                 {
-                    // Kết hợp đường dẫn thư mục đang chạy (Debug) với đường dẫn Images\a.png
-                    string fullPath = System.IO.Path.Combine(Application.StartupPath, item.ImagePath);
-
+                    string fullPath = System.IO.Path.Combine(
+                        Application.StartupPath, "Images", item.HinhAnh);
                     if (System.IO.File.Exists(fullPath))
                     {
-                        // Dùng cách này để load ảnh mà không giữ khóa (lock) file
                         using (var stream = System.IO.File.OpenRead(fullPath))
                         {
                             Image img = Image.FromStream(stream);
@@ -104,11 +103,15 @@ namespace projectWindowform
                         btnFood.TextImageRelation = TextImageRelation.ImageAboveText;
                     }
                 }
-                catch (Exception ex)
+                catch { }
+
+                // Gán FoodId vào Tag
+                btnFood.Tag = new OrderItem
                 {
-                    Console.WriteLine("Lỗi nạp ảnh: " + ex.Message);
-                }
-                btnFood.Tag = new OrderItem { FoodName = item.Name, Price = item.Price };
+                    FoodId = item.Id,      // ← có FoodId thật rồi
+                    FoodName = item.TenMon,
+                    Price = (int)item.Gia
+                };
                 btnFood.Click += BtnFood_Click;
                 flpThucdon.Controls.Add(btnFood);
             }
@@ -116,14 +119,23 @@ namespace projectWindowform
 
         private void BtnTable_Click(object sender, EventArgs e)
         {
-            if (_selectedTableBtn != null && !_orderBLL.HasOrder(_selectedTableBtn.Tag.ToString()))
-                _selectedTableBtn.BackColor = Color.LightGray;
-            else if (_selectedTableBtn != null)
-                _selectedTableBtn.BackColor = Color.LightGreen;
+            if (_selectedTableBtn != null)
+            {
+                // Lấy table từ Tag đúng cách
+                var prevTable = _selectedTableBtn.Tag as Table;
+                if (!_orderBLL.HasOrder(prevTable.TenBan))  // ← dùng prevTable.TenBan
+                    _selectedTableBtn.BackColor = Color.LightGray;
+                else
+                    _selectedTableBtn.BackColor = Color.LightGreen;
+            }
 
             _selectedTableBtn = sender as Button;
             _selectedTableBtn.BackColor = Color.LightSkyBlue;
-            _currentTableName = _selectedTableBtn.Tag.ToString();
+
+            var table = _selectedTableBtn.Tag as Table;
+            _currentTableName = table.TenBan;
+            _currentTableId = table.Id;
+
             ShowBill(_currentTableName);
         }
 
@@ -141,6 +153,7 @@ namespace projectWindowform
             {
                 _temporarySelectedFoods.Add(new OrderItem
                 {
+                    FoodId = data.FoodId,
                     FoodName = data.FoodName,
                     Price = data.Price,
                     Quantity = quantity
@@ -209,13 +222,21 @@ namespace projectWindowform
 
             if (MessageBox.Show($"Thanh toán cho {_currentTableName}?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                _orderBLL.Checkout(_currentTableName);
-                _selectedTableBtn.Text = _currentTableName + Environment.NewLine + "(Trống)";
-                _selectedTableBtn.BackColor = Color.LightSkyBlue;
+                try
+                {
+                    _orderBLL.Checkout(_currentTableName,_currentTableId); // BLL tự lo lưu Bill
 
-                ShowBill(_currentTableName);
-                UpdateTableStatus();
-                MessageBox.Show("Thanh toán thành công!");
+                    _selectedTableBtn.Text = _currentTableName + Environment.NewLine + "(Trống)";
+                    _selectedTableBtn.BackColor = Color.LightSkyBlue;
+                    ShowBill(_currentTableName);
+                    UpdateTableStatus();
+                    MessageBox.Show("Thanh toán thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi thanh toán: " + ex.Message, "Lỗi",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

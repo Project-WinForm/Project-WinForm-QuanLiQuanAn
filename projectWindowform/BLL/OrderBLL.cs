@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using projectWindowform.DAL;
+using projectWindowform.DTO;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using tieuluan.DAL;
 using tieuluan.DTO;
 
@@ -7,6 +11,8 @@ namespace tieuluan.BLL
     public class OrderBLL
     {
         private OrderDAL _orderDAL = new OrderDAL();
+        private BillDAL _billDAL = new BillDAL();
+        private FoodDAL _foodDAL = new FoodDAL();
 
         public List<OrderItem> GetBill(string tableName)
         {
@@ -48,8 +54,36 @@ namespace tieuluan.BLL
             _orderDAL.DeleteFood(tableName, foodName);
         }
 
-        public void Checkout(string tableName)
+        public void Checkout(string tableName , int tableId)
         {
+            // Lấy danh sách món hiện tại
+            var currentBill = _orderDAL.GetOrders(tableName);
+            decimal tongTien = currentBill.Sum(x => x.Price * x.Quantity);
+
+            var bill = new Bill
+            {
+                TableId = tableId,
+                ThoiGianMo = DateTime.Now,
+                ThoiGianDong = DateTime.Now,
+                TongTien = tongTien,
+                TrangThai = true
+            };
+
+            var details = new List<BillDetail>();
+            foreach (var item in currentBill)
+            {
+                // Tra FoodId từ DB bằng FoodName
+                int foodId = _foodDAL.GetFoodIdByName(item.FoodName);
+
+                details.Add(new BillDetail
+                {
+                    FoodId = foodId,
+                    SoLuong = item.Quantity,
+                    DonGia = item.Price
+                });
+            }
+
+            _billDAL.SaveBill(bill, details);
             _orderDAL.ClearTable(tableName);
         }
 
