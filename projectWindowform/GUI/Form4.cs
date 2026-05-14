@@ -75,7 +75,7 @@ namespace projectWindowform.GUI
 
         private void txtPassW_Enter(object sender, EventArgs e)
         {
-                        if (txtPassW.Text == "Password")
+            if (txtPassW.Text == "Password")
             {
                 txtPassW.Text = "";
                 txtPassW.UseSystemPasswordChar = true;
