@@ -92,5 +92,16 @@ namespace projectWindowform.GUI
             option.Series.Add(series);
             uiBarChart2.SetOption(option);
         }
+
+        private void btnThongKe_Click_1(object sender, EventArgs e)
+        {
+            LoadThongKe();
+
+            MessageBox.Show(
+                "Statistics generated successfully!",
+                "Notification",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
     }
 }
