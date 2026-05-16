@@ -61,6 +61,7 @@
     <Compile Include="BLL\OrderBLL.cs" />
     <Compile Include="BLL\StaffBLL.cs" />
     <Compile Include="BLL\TableBLL.cs" />
+    <Compile Include="BLL\ThongKeBLL.cs" />
     <Compile Include="DAL\BillDAL.cs" />
     <Compile Include="DAL\BillDetailDAL.cs" />
     <Compile Include="DAL\CategoryDAL.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="DAL\OrderDAL.cs" />
     <Compile Include="DAL\StaffDAL.cs" />
     <Compile Include="DAL\TableDAL.cs" />
+    <Compile Include="DAL\ThongKeDAL.cs" />
     <Compile Include="DTO\Bill.cs" />
     <Compile Include="DTO\BillDetail.cs" />
     <Compile Include="DTO\Category.cs" />
@@ -138,6 +140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Form5.resx">
       <DependentUpon>Form5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Form6.resx">
+      <DependentUpon>Form6.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
