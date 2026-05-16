@@ -42,7 +42,6 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtSearch = new System.Windows.Forms.TextBox();
-            this.btnSearch = new System.Windows.Forms.Button();
             this.dgvFood = new System.Windows.Forms.DataGridView();
             this.FoodID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FoodName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -196,17 +195,6 @@
             this.txtSearch.TabIndex = 13;
             this.txtSearch.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
-            // btnSearch
-            // 
-            this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(489, 293);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(98, 36);
-            this.btnSearch.TabIndex = 14;
-            this.btnSearch.Text = "Search";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
             // dgvFood
             // 
             this.dgvFood.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -293,7 +281,6 @@
             this.Controls.Add(this.btnChooseImg);
             this.Controls.Add(this.picFood);
             this.Controls.Add(this.dgvFood);
-            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnNew);
@@ -334,7 +321,6 @@
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtSearch;
-        private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.DataGridView dgvFood;
         private System.Windows.Forms.PictureBox picFood;
         private System.Windows.Forms.Button btnChooseImg;
