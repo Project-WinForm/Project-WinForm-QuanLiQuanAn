@@ -29,7 +29,33 @@ namespace projectWindowform
         int selectedFoodId = -1;
 
 
+        private void DinhDangBang()
+        {
+            dgvFood.BorderStyle = BorderStyle.None;
+            dgvFood.BackgroundColor = Color.White;
 
+            dgvFood.EnableHeadersVisualStyles = false;
+
+            dgvFood.ColumnHeadersDefaultCellStyle.BackColor =
+                Color.FromArgb(52, 73, 94);
+
+            dgvFood.ColumnHeadersDefaultCellStyle.ForeColor =
+                Color.White;
+
+            dgvFood.ColumnHeadersDefaultCellStyle.Font =
+                new Font("Segoe UI", 10, FontStyle.Bold);
+
+            dgvFood.DefaultCellStyle.Font =
+                new Font("Segoe UI", 10);
+
+            dgvFood.RowTemplate.Height = 30;
+
+            dgvFood.AutoSizeColumnsMode =
+                DataGridViewAutoSizeColumnsMode.Fill;
+
+            dgvFood.SelectionMode =
+                DataGridViewSelectionMode.FullRowSelect;
+        }
         private void btnChooseImage_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -68,6 +94,7 @@ namespace projectWindowform
             cboCategory.Enabled = false;
             cboStatus.Enabled = false;
             btnChooseImg.Enabled = false;
+            DinhDangBang();
         }
 
         private void ResetstatusAdd()
