@@ -63,6 +63,36 @@ namespace projectWindowform.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap z7815713005338_dabb52cdbdac8b58406864113719fe9a {
+            get {
+                object obj = ResourceManager.GetObject("z7815713005338_dabb52cdbdac8b58406864113719fe9a", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap z7815713007825_21876bee1db27a9916a5b031f0930252 {
+            get {
+                object obj = ResourceManager.GetObject("z7815713007825_21876bee1db27a9916a5b031f0930252", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap z7815905006311_04e038a882c3aca245a694361381e3d1 {
+            get {
+                object obj = ResourceManager.GetObject("z7815905006311_04e038a882c3aca245a694361381e3d1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap z7816156028918_0d49d8509c720d335dd065896a66515a {
             get {
                 object obj = ResourceManager.GetObject("z7816156028918_0d49d8509c720d335dd065896a66515a", resourceCulture);

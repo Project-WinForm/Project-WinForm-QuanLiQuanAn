@@ -47,13 +47,16 @@
             // 
             // dgvStaff
             // 
+            this.dgvStaff.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvStaff.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStaff.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvStaff.GridColor = System.Drawing.SystemColors.ActiveCaption;
             this.dgvStaff.Location = new System.Drawing.Point(0, 0);
             this.dgvStaff.Name = "dgvStaff";
             this.dgvStaff.RowHeadersWidth = 51;
             this.dgvStaff.RowTemplate.Height = 24;
-            this.dgvStaff.Size = new System.Drawing.Size(941, 350);
+            this.dgvStaff.Size = new System.Drawing.Size(1478, 350);
             this.dgvStaff.TabIndex = 0;
             this.dgvStaff.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStaff_CellClick);
             // 
@@ -71,19 +74,19 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 354);
+            this.groupBox1.Location = new System.Drawing.Point(0, 375);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(941, 149);
+            this.groupBox1.Size = new System.Drawing.Size(1478, 202);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
             // btnDelete
             // 
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(588, 96);
+            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDelete.Location = new System.Drawing.Point(208, 18);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(80, 29);
+            this.btnDelete.Size = new System.Drawing.Size(112, 181);
             this.btnDelete.TabIndex = 10;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -91,10 +94,11 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(340, 96);
+            this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate.Location = new System.Drawing.Point(106, 18);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(80, 29);
+            this.btnUpdate.Size = new System.Drawing.Size(102, 181);
             this.btnUpdate.TabIndex = 9;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -102,10 +106,11 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(113, 96);
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAdd.Location = new System.Drawing.Point(3, 18);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(80, 29);
+            this.btnAdd.Size = new System.Drawing.Size(103, 181);
             this.btnAdd.TabIndex = 8;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -113,36 +118,36 @@
             // 
             // txtRole
             // 
-            this.txtRole.Location = new System.Drawing.Point(793, 34);
+            this.txtRole.Location = new System.Drawing.Point(1100, 34);
             this.txtRole.Name = "txtRole";
-            this.txtRole.Size = new System.Drawing.Size(115, 22);
+            this.txtRole.Size = new System.Drawing.Size(161, 22);
             this.txtRole.TabIndex = 7;
             // 
             // txtDisplayName
             // 
-            this.txtDisplayName.Location = new System.Drawing.Point(588, 34);
+            this.txtDisplayName.Location = new System.Drawing.Point(1100, 100);
             this.txtDisplayName.Name = "txtDisplayName";
-            this.txtDisplayName.Size = new System.Drawing.Size(140, 22);
+            this.txtDisplayName.Size = new System.Drawing.Size(161, 22);
             this.txtDisplayName.TabIndex = 6;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(340, 34);
+            this.txtPassword.Location = new System.Drawing.Point(531, 34);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(140, 22);
+            this.txtPassword.Size = new System.Drawing.Size(182, 22);
             this.txtPassword.TabIndex = 5;
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(99, 34);
+            this.txtUsername.Location = new System.Drawing.Point(531, 103);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(140, 22);
+            this.txtUsername.Size = new System.Drawing.Size(182, 22);
             this.txtUsername.TabIndex = 4;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(745, 40);
+            this.label4.Location = new System.Drawing.Point(889, 53);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 16);
             this.label4.TabIndex = 3;
@@ -151,7 +156,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(486, 37);
+            this.label3.Location = new System.Drawing.Point(889, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 16);
             this.label3.TabIndex = 2;
@@ -160,7 +165,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(257, 37);
+            this.label2.Location = new System.Drawing.Point(368, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 16);
             this.label2.TabIndex = 1;
@@ -170,7 +175,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 34);
+            this.label1.Location = new System.Drawing.Point(368, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 16);
             this.label1.TabIndex = 0;
@@ -180,7 +185,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(941, 503);
+            this.ClientSize = new System.Drawing.Size(1478, 577);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvStaff);
             this.Name = "Form3";

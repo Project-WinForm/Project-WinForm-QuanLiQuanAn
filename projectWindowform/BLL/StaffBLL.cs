@@ -57,6 +57,7 @@ namespace projectWindowform.BLL
 
             return dal.InsertStaff(user.TenDangNhap, user.MatKhau, user.TenHienThi, user.VaiTro);
         }
+       
 
         // =========================
         // SỬA NHÂN VIÊN

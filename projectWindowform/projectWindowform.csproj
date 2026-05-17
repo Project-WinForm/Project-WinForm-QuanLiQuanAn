@@ -191,6 +191,9 @@
     <Content Include="Images\e.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\z7815713007825_21876bee1db27a9916a5b031f0930252.jpg" />
+    <None Include="Resources\z7815905006311_04e038a882c3aca245a694361381e3d1.jpg" />
+    <None Include="Resources\z7815713005338_dabb52cdbdac8b58406864113719fe9a.jpg" />
     <None Include="Resources\z7816217024849_53e48889b81dfef74f8b939471d1cf5f.jpg" />
     <None Include="Resources\z7816156028918_0d49d8509c720d335dd065896a66515a.jpg" />
   </ItemGroup>
