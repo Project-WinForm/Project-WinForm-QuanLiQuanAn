@@ -84,16 +84,6 @@ namespace projectWindowform.BLL
         }
 
 
-        // =========================
-        // TÌM KIẾM NHÂN VIÊN
-        // =========================
-        public DataTable Search(string keyword)
-        {
-            if (string.IsNullOrWhiteSpace(keyword))
-                return new DataTable();
-
-            return dal.SearchStaff(keyword);
-        }
 
         // =========================
         // KIỂM TRA ADMIN
