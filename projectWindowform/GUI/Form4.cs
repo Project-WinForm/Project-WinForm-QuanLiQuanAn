@@ -20,31 +20,35 @@ namespace projectWindowform.GUI
 
         private StaffBLL staffBLL = new StaffBLL();
 
-        
+
 
         private void btnLoginn_Click(object sender, EventArgs e)
         {
-            if (staffBLL.IsAdmin(txtUserN.Text))
+            if (staffBLL.Login(txtUserN.Text, txtPassW.Text))
             {
-                MessageBox.Show("Đăng nhập thành công với quyền quản trị!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                Form2 mainForm = new Form2();
-                mainForm.ShowDialog();
-                this.Close();
-            }
-            else if (staffBLL.Login(txtUserN.Text, txtPassW.Text))
-            {
-                MessageBox.Show("Đăng nhập thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                Form1 mainForm = new Form1();
-                mainForm.ShowDialog();
-                this.Close();
+                if (staffBLL.IsAdmin(txtUserN.Text))
+                {
+                    MessageBox.Show("Đăng nhập thành công với quyền quản trị!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+
+                    Form2 mainForm = new Form2(); // Mở Form quản trị của Admin
+                    mainForm.ShowDialog();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Đăng nhập thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Hide();
+
+                    Form1 mainForm = new Form1(); // Mở Form bán hàng của Nhân viên
+                    mainForm.ShowDialog();
+                    this.Close();
+                }
             }
             else
             {
                 MessageBox.Show("Tên đăng nhập hoặc mật khẩu không đúng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
 

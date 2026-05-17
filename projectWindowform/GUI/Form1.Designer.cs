@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lnkDangXuat = new System.Windows.Forms.LinkLabel();
             this.lblBanTrong = new System.Windows.Forms.Label();
             this.lblBanCoKhach = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,6 +50,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.lnkDangXuat);
             this.panel1.Controls.Add(this.lblBanTrong);
             this.panel1.Controls.Add(this.lblBanCoKhach);
             this.panel1.Controls.Add(this.label1);
@@ -61,6 +63,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1248, 100);
             this.panel1.TabIndex = 0;
+            // 
+            // lnkDangXuat
+            // 
+            this.lnkDangXuat.AutoSize = true;
+            this.lnkDangXuat.LinkColor = System.Drawing.Color.Black;
+            this.lnkDangXuat.Location = new System.Drawing.Point(884, 72);
+            this.lnkDangXuat.Name = "lnkDangXuat";
+            this.lnkDangXuat.Size = new System.Drawing.Size(66, 16);
+            this.lnkDangXuat.TabIndex = 7;
+            this.lnkDangXuat.TabStop = true;
+            this.lnkDangXuat.Text = "Đăng xuất";
+            this.lnkDangXuat.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkDangXuat_LinkClicked);
             // 
             // lblBanTrong
             // 
@@ -239,6 +253,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader6;
         private System.Windows.Forms.Label lblBanTrong;
         private System.Windows.Forms.Label lblBanCoKhach;
+        private System.Windows.Forms.LinkLabel lnkDangXuat;
     }
 }
 

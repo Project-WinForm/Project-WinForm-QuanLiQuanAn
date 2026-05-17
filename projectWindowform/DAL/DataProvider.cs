@@ -10,7 +10,7 @@ namespace projectWindowform.DAL
 {
     public class DataProvider
     {
-        private string connectionString = "Data Source=localhost;Initial Catalog=QuanLyQuanAn;Integrated Security=True;TrustServerCertificate=True";
+        private string connectionString = "Data Source=LAPTOP-FUTK693G\\SQLEXPRESS;Initial Catalog=QuanLyQuanAn;Integrated Security=True;TrustServerCertificate=True";
 
         public DataTable ExecuteQuery(string query, object[] parameter = null)
         {

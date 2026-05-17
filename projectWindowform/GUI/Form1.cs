@@ -256,5 +256,15 @@ namespace projectWindowform
             }
             lblTong.Text = "Tổng tiền: " + totalAmount.ToString("N0") + " VNĐ";
         }
+        private void lnkDangXuat_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (MessageBox.Show("Xác nhận đăng xuất khỏi hệ thống nhà hàng?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.Hide();
+                projectWindowform.GUI.Form4 loginForm = new projectWindowform.GUI.Form4();
+                loginForm.ShowDialog();
+                this.Close();
+            }
+        }
     }
 }
