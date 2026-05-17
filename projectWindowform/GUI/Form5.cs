@@ -94,6 +94,8 @@ namespace projectWindowform
             cboCategory.Enabled = false;
             cboStatus.Enabled = false;
             btnChooseImg.Enabled = false;
+            btnNew.Enabled = false;
+            btnCancel.Enabled = false;
             DinhDangBang();
         }
 
@@ -107,6 +109,8 @@ namespace projectWindowform
             cboCategory.Enabled = false;
             cboStatus.Enabled = false;
             btnChooseImg.Enabled = false;
+            btnNew.Enabled = false;
+            btnCancel.Enabled = false;
         }
 
 
@@ -122,6 +126,8 @@ namespace projectWindowform
                 cboCategory.Enabled = true;
                 cboStatus.Enabled = true;
                 btnChooseImg.Enabled = true;
+                btnCancel.Enabled = true;
+                btnNew.Enabled = true;
             }
             else
             {
@@ -164,6 +170,8 @@ namespace projectWindowform
             cboCategory.Enabled = false;
             cboStatus.Enabled = false;
             btnChooseImg.Enabled = false;
+            btnNew.Enabled = false;
+            btnCancel.Enabled = false;
 
         }
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -178,6 +186,8 @@ namespace projectWindowform
                 cboCategory.Enabled = true;
                 cboStatus.Enabled = true;
                 btnChooseImg.Enabled = true;
+                btnCancel.Enabled = true;
+                btnNew.Enabled = true;
             }
             else
             {
@@ -264,6 +274,43 @@ namespace projectWindowform
         {
             txtNameFood.Text = "";
             txtPrice.Text = "";
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            // 1. Đưa các nút bấm về trạng thái ban đầu
+            btnAdd.Text = "Add";
+            btnUpdate.Text = "Update";
+
+            btnAdd.Enabled = true;
+            btnUpdate.Enabled = true;
+            btnDelete.Enabled = true;
+            btnCancel.Enabled = false;
+            btnNew.Enabled = false;
+
+            // 2. Vô hiệu hóa các ô nhập liệu (Read-only)
+            txtNameFood.Enabled = false;
+            txtPrice.Enabled = false;
+            cboCategory.Enabled = false;
+            cboStatus.Enabled = false;
+            btnChooseImg.Enabled = false;
+
+            // 3. Xóa dữ liệu tạm đang nhập dở (Tùy chọn)
+            // Nếu bạn muốn giữ lại dữ liệu cũ đã chọn trên bảng thì dùng:
+            if (selectedFoodId != -1)
+            {
+                // Bạn có thể gọi lại hàm CellClick hoặc tự điền lại để "reset" giao diện về dòng đang chọn
+                dgvFood_CellClick(dgvFood, new DataGridViewCellEventArgs(0, dgvFood.CurrentRow.Index));
+            }
+            else
+            {
+                txtNameFood.Text = "";
+                txtPrice.Text = "";
+                imageName = "";
+                picFood.Image = null; // Xóa ảnh hiển thị nếu có
+            }
+
+            MessageBox.Show("Đã hủy thao tác!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

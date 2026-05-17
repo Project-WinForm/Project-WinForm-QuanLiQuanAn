@@ -52,6 +52,7 @@
             this.btnChooseImg = new System.Windows.Forms.Button();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
+            this.btnCancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFood)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -198,7 +199,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(70, 380);
+            this.label5.Location = new System.Drawing.Point(60, 410);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(79, 28);
             this.label5.TabIndex = 12;
@@ -207,7 +208,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(151, 380);
+            this.txtSearch.Location = new System.Drawing.Point(141, 410);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(303, 34);
             this.txtSearch.TabIndex = 13;
@@ -294,6 +295,7 @@
             // 
             // uiGroupBox1
             // 
+            this.uiGroupBox1.Controls.Add(this.btnCancel);
             this.uiGroupBox1.Controls.Add(this.label1);
             this.uiGroupBox1.Controls.Add(this.btnChooseImg);
             this.uiGroupBox1.Controls.Add(this.label2);
@@ -315,7 +317,7 @@
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(1221, 334);
+            this.uiGroupBox1.Size = new System.Drawing.Size(1221, 341);
             this.uiGroupBox1.TabIndex = 18;
             this.uiGroupBox1.Text = "Food Infomation";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -325,7 +327,7 @@
             this.uiGroupBox2.Controls.Add(this.dgvFood);
             this.uiGroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiGroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiGroupBox2.Location = new System.Drawing.Point(0, 453);
+            this.uiGroupBox2.Location = new System.Drawing.Point(0, 508);
             this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
@@ -335,12 +337,26 @@
             this.uiGroupBox2.Text = "FoodList";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // btnCancel
+            // 
+            this.btnCancel.BackColor = System.Drawing.Color.Yellow;
+            this.btnCancel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCancel.FlatAppearance.BorderSize = 0;
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCancel.Location = new System.Drawing.Point(599, 239);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(98, 42);
+            this.btnCancel.TabIndex = 18;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1221, 736);
+            this.ClientSize = new System.Drawing.Size(1221, 791);
             this.Controls.Add(this.uiGroupBox2);
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.txtSearch);
@@ -384,5 +400,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private Sunny.UI.UIGroupBox uiGroupBox1;
         private Sunny.UI.UIGroupBox uiGroupBox2;
+        private System.Windows.Forms.Button btnCancel;
     }
 }

@@ -40,8 +40,8 @@
             this.btnThongKe = new Sunny.UI.UIButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.panel_Revenue = new System.Windows.Forms.Panel();
-            this.lblRevenueTitle = new Sunny.UI.UILabel();
             this.lblTotalRevenue = new Sunny.UI.UILabel();
+            this.lblRevenueTitle = new Sunny.UI.UILabel();
             this.pnlFood = new System.Windows.Forms.Panel();
             this.uiLabel5 = new Sunny.UI.UILabel();
             this.lblFoodTitle = new Sunny.UI.UILabel();
@@ -171,6 +171,17 @@
             this.panel_Revenue.Size = new System.Drawing.Size(299, 106);
             this.panel_Revenue.TabIndex = 7;
             // 
+            // lblTotalRevenue
+            // 
+            this.lblTotalRevenue.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRevenue.ForeColor = System.Drawing.Color.Green;
+            this.lblTotalRevenue.Location = new System.Drawing.Point(148, 15);
+            this.lblTotalRevenue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTotalRevenue.Name = "lblTotalRevenue";
+            this.lblTotalRevenue.Size = new System.Drawing.Size(178, 36);
+            this.lblTotalRevenue.TabIndex = 1;
+            this.lblTotalRevenue.Text = "uiLabel2";
+            // 
             // lblRevenueTitle
             // 
             this.lblRevenueTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -181,17 +192,6 @@
             this.lblRevenueTitle.Size = new System.Drawing.Size(169, 27);
             this.lblRevenueTitle.TabIndex = 0;
             this.lblRevenueTitle.Text = "Total Revenue:";
-            // 
-            // lblTotalRevenue
-            // 
-            this.lblTotalRevenue.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRevenue.ForeColor = System.Drawing.Color.Green;
-            this.lblTotalRevenue.Location = new System.Drawing.Point(148, 15);
-            this.lblTotalRevenue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTotalRevenue.Name = "lblTotalRevenue";
-            this.lblTotalRevenue.Size = new System.Drawing.Size(149, 36);
-            this.lblTotalRevenue.TabIndex = 1;
-            this.lblTotalRevenue.Text = "uiLabel2";
             // 
             // pnlFood
             // 
