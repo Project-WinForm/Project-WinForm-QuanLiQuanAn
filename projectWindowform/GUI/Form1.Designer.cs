@@ -44,12 +44,18 @@
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblTong = new System.Windows.Forms.Label();
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cboCategory = new System.Windows.Forms.ComboBox();
+            this.cboSwitchTable = new System.Windows.Forms.ComboBox();
+            this.btnSwitchTable = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmrSoluong)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSwitchTable);
+            this.panel1.Controls.Add(this.cboSwitchTable);
             this.panel1.Controls.Add(this.lnkDangXuat);
             this.panel1.Controls.Add(this.lblBanTrong);
             this.panel1.Controls.Add(this.lblBanCoKhach);
@@ -97,7 +103,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(323, 30);
+            this.label1.Location = new System.Drawing.Point(235, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(63, 16);
             this.label1.TabIndex = 4;
@@ -105,7 +111,7 @@
             // 
             // nmrSoluong
             // 
-            this.nmrSoluong.Location = new System.Drawing.Point(415, 28);
+            this.nmrSoluong.Location = new System.Drawing.Point(327, 16);
             this.nmrSoluong.Name = "nmrSoluong";
             this.nmrSoluong.Size = new System.Drawing.Size(120, 22);
             this.nmrSoluong.TabIndex = 3;
@@ -138,7 +144,7 @@
             // btnThemmon
             // 
             this.btnThemmon.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnThemmon.Location = new System.Drawing.Point(553, 28);
+            this.btnThemmon.Location = new System.Drawing.Point(467, 28);
             this.btnThemmon.Name = "btnThemmon";
             this.btnThemmon.Size = new System.Drawing.Size(150, 60);
             this.btnThemmon.TabIndex = 0;
@@ -157,9 +163,9 @@
             // flpThucdon
             // 
             this.flpThucdon.AutoScroll = true;
-            this.flpThucdon.Location = new System.Drawing.Point(238, 0);
+            this.flpThucdon.Location = new System.Drawing.Point(238, 43);
             this.flpThucdon.Name = "flpThucdon";
-            this.flpThucdon.Size = new System.Drawing.Size(712, 517);
+            this.flpThucdon.Size = new System.Drawing.Size(712, 474);
             this.flpThucdon.TabIndex = 2;
             // 
             // lsvHoadon
@@ -167,8 +173,10 @@
             this.lsvHoadon.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader5,
+            this.columnHeader7,
             this.columnHeader6});
             this.lsvHoadon.Dock = System.Windows.Forms.DockStyle.Right;
+            this.lsvHoadon.FullRowSelect = true;
             this.lsvHoadon.HideSelection = false;
             this.lsvHoadon.Location = new System.Drawing.Point(941, 0);
             this.lsvHoadon.Name = "lsvHoadon";
@@ -180,7 +188,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Tên món";
-            this.columnHeader4.Width = 126;
+            this.columnHeader4.Width = 102;
             // 
             // columnHeader5
             // 
@@ -192,7 +200,7 @@
             // 
             this.columnHeader6.Text = "Thành tiền";
             this.columnHeader6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader6.Width = 111;
+            this.columnHeader6.Width = 77;
             // 
             // lblTong
             // 
@@ -206,9 +214,44 @@
             this.lblTong.TabIndex = 4;
             this.lblTong.Text = "Tổng tiền:";
             // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Đơn giá";
+            this.columnHeader7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader7.Width = 59;
+            // 
+            // cboCategory
+            // 
+            this.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboCategory.FormattingEnabled = true;
+            this.cboCategory.Location = new System.Drawing.Point(244, 6);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Size = new System.Drawing.Size(691, 30);
+            this.cboCategory.TabIndex = 5;
+            // 
+            // cboSwitchTable
+            // 
+            this.cboSwitchTable.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSwitchTable.FormattingEnabled = true;
+            this.cboSwitchTable.Location = new System.Drawing.Point(662, 16);
+            this.cboSwitchTable.Name = "cboSwitchTable";
+            this.cboSwitchTable.Size = new System.Drawing.Size(75, 24);
+            this.cboSwitchTable.TabIndex = 8;
+            // 
+            // btnSwitchTable
+            // 
+            this.btnSwitchTable.Location = new System.Drawing.Point(757, 16);
+            this.btnSwitchTable.Name = "btnSwitchTable";
+            this.btnSwitchTable.Size = new System.Drawing.Size(75, 23);
+            this.btnSwitchTable.TabIndex = 9;
+            this.btnSwitchTable.Text = "Đổi Bàn";
+            this.btnSwitchTable.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(1248, 617);
+            this.Controls.Add(this.cboCategory);
             this.Controls.Add(this.lblTong);
             this.Controls.Add(this.lsvHoadon);
             this.Controls.Add(this.flpThucdon);
@@ -254,6 +297,10 @@
         private System.Windows.Forms.Label lblBanTrong;
         private System.Windows.Forms.Label lblBanCoKhach;
         private System.Windows.Forms.LinkLabel lnkDangXuat;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ComboBox cboCategory;
+        private System.Windows.Forms.Button btnSwitchTable;
+        private System.Windows.Forms.ComboBox cboSwitchTable;
     }
 }
 

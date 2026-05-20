@@ -191,6 +191,10 @@
     <Content Include="Images\e.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\hiện.png" />
+    <None Include="Resources\hiện1.png" />
+    <Content Include="Resources\ẩn.png" />
+    <None Include="Resources\ẩn1.png" />
     <None Include="Resources\z7815713007825_21876bee1db27a9916a5b031f0930252.jpg" />
     <None Include="Resources\z7815905006311_04e038a882c3aca245a694361381e3d1.jpg" />
     <None Include="Resources\z7815713005338_dabb52cdbdac8b58406864113719fe9a.jpg" />

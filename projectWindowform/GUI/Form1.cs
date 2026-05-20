@@ -32,7 +32,13 @@ namespace projectWindowform
             btnXoa.Click += btnRemove_Click;
             btnThanhtoan.Click += btnCheckout_Click;
 
+            // --- ĐĂNG KÝ SỰ KIỆN CHO CÁC PHẦN MỚI NÂNG CẤP ---
+            btnSwitchTable.Click += btnSwitchTable_Click; // Sự kiện nút Đổi bàn
+            cboCategory.SelectedIndexChanged += CboCategory_SelectedIndexChanged; // Sự kiện lọc danh mục
+
             LoadTableList();
+            LoadCategoryToComboBox(); // Nạp dữ liệu vào ô Danh mục
+            LoadTableToComboBox();    // Nạp dữ liệu vào ô Đổi bàn
             LoadMenuList();
             UpdateTableStatus();
         }
@@ -46,10 +52,21 @@ namespace projectWindowform
             foreach (var table in tables)
             {
                 Button btnTable = new Button();
-                btnTable.Text = table.TenBan + Environment.NewLine + "(Trống)";
+
+                // Kiểm tra xem bàn thực tế đang có hóa đơn chưa để gán chữ trạng thái lúc mở app
+                if (_orderBLL.HasOrder(table.TenBan))
+                {
+                    btnTable.Text = table.TenBan + Environment.NewLine + "(Có khách)";
+                    btnTable.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    btnTable.Text = table.TenBan + Environment.NewLine + "(Trống)";
+                    btnTable.BackColor = Color.LightGray;
+                }
+
                 btnTable.Width = 90;
                 btnTable.Height = 90;
-                btnTable.BackColor = Color.LightGray;
                 btnTable.FlatStyle = FlatStyle.Flat;
                 btnTable.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                 btnTable.Tag = table;   // ← gán cả object Table
@@ -61,7 +78,6 @@ namespace projectWindowform
 
         private void UpdateTableStatus()
         {
-            // Tự động lấy số lượng bàn đã khai báo ở đầu Class
             int occupied = _orderBLL.GetOccupiedTableCount();
             int empty = _orderBLL.GetEmptyTableCount(totalTablesCount);
 
@@ -69,13 +85,47 @@ namespace projectWindowform
             lblBanTrong.Text = "Bàn trống: " + empty;
         }
 
+        // --- NẠP DANH SÁCH DANH MỤC ĐỘNG TỪ DATABASE VÀO COMBOBOX ---
+        private void LoadCategoryToComboBox()
+        {
+            cboCategory.Items.Clear();
+            cboCategory.Items.Add("Tất cả món");
+
+            var foods = _foodBLL.GetFoods();
+            List<string> addedCategories = new List<string>();
+
+            foreach (var item in foods)
+            {
+                // Nếu món ăn có tên danh mục hợp lệ và chưa được thêm vào ComboBox
+                if (!string.IsNullOrEmpty(item.TenDanhMuc) && !addedCategories.Contains(item.TenDanhMuc))
+                {
+                    addedCategories.Add(item.TenDanhMuc);
+                    cboCategory.Items.Add(item.TenDanhMuc);
+                }
+            }
+
+            if (cboCategory.Items.Count > 0) cboCategory.SelectedIndex = 0;
+        }
+
+        // --- NẠP DANH SÁCH TÊN BÀN VÀO COMBOBOX ĐỔI BÀN ---
+        private void LoadTableToComboBox()
+        {
+            cboSwitchTable.Items.Clear();
+            var tables = _tableBLL.GetTables();
+            foreach (var table in tables)
+            {
+                cboSwitchTable.Items.Add(table.TenBan);
+            }
+            if (cboSwitchTable.Items.Count > 0)
+            {
+                cboSwitchTable.SelectedIndex = 0;
+            }
+        }
 
         private void LoadMenuList()
         {
             flpThucdon.Controls.Clear();
-
-            // Load từ DB thay vì hardcode
-            var foods = _foodBLL.GetFoods(); // cần viết FoodBLL + FoodDAL
+            var foods = _foodBLL.GetFoods(); // Load từ DB
 
             foreach (var item in foods)
             {
@@ -88,7 +138,6 @@ namespace projectWindowform
                 btnFood.FlatStyle = FlatStyle.Flat;
                 btnFood.Font = new Font("Segoe UI", 9, FontStyle.Bold);
 
-                // Load ảnh như cũ
                 try
                 {
                     string fullPath = System.IO.Path.Combine(
@@ -105,10 +154,60 @@ namespace projectWindowform
                 }
                 catch { }
 
-                // Gán FoodId vào Tag
                 btnFood.Tag = new OrderItem
                 {
-                    FoodId = item.Id,      // ← có FoodId thật rồi
+                    FoodId = item.Id,
+                    FoodName = item.TenMon,
+                    Price = (int)item.Gia
+                };
+                btnFood.Click += BtnFood_Click;
+                flpThucdon.Controls.Add(btnFood);
+            }
+        }
+
+        // --- LOGIC XỬ LÝ LỌC THỰC ĐƠN ĐỘNG THEO DANH MỤC CHUẨN DATABASE ---
+        private void CboCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboCategory.SelectedItem == null) return;
+            string selectedCat = cboCategory.SelectedItem.ToString();
+
+            flpThucdon.Controls.Clear();
+            var foods = _foodBLL.GetFoods();
+
+            foreach (var item in foods)
+            {
+                // Đối chiếu trực tiếp trường TenDanhMuc của dữ liệu với danh mục được chọn trên giao diện
+                if (selectedCat != "Tất cả món" && item.TenDanhMuc != selectedCat)
+                {
+                    continue;
+                }
+
+                Button btnFood = new Button();
+                btnFood.Text = item.TenMon + Environment.NewLine + item.Gia.ToString("N0") + "đ";
+                btnFood.Width = 150;
+                btnFood.Height = 140;
+                btnFood.BackColor = Color.White;
+                btnFood.FlatStyle = FlatStyle.Flat;
+                btnFood.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+
+                try
+                {
+                    string fullPath = System.IO.Path.Combine(Application.StartupPath, "Images", item.HinhAnh);
+                    if (System.IO.File.Exists(fullPath))
+                    {
+                        using (var stream = System.IO.File.OpenRead(fullPath))
+                        {
+                            Image img = Image.FromStream(stream);
+                            btnFood.Image = new Bitmap(img, new Size(100, 80));
+                        }
+                        btnFood.TextImageRelation = TextImageRelation.ImageAboveText;
+                    }
+                }
+                catch { }
+
+                btnFood.Tag = new OrderItem
+                {
+                    FoodId = item.Id,
                     FoodName = item.TenMon,
                     Price = (int)item.Gia
                 };
@@ -121,13 +220,18 @@ namespace projectWindowform
         {
             if (_selectedTableBtn != null)
             {
-                // Lấy table từ Tag đúng cách
                 var prevTable = _selectedTableBtn.Tag as Table;
-                if (!_orderBLL.HasOrder(prevTable.TenBan))  // ← dùng prevTable.TenBan
+                if (!_orderBLL.HasOrder(prevTable.TenBan))
                     _selectedTableBtn.BackColor = Color.LightGray;
                 else
                     _selectedTableBtn.BackColor = Color.LightGreen;
             }
+
+            // --- FIX LỖI KẸT MÓN: Reset món ăn tạm thời (màu cam) của bàn cũ khi bấm sang bàn khác ---
+            _temporarySelectedFoods.Clear();
+            LoadMenuList(); // Reset lại toàn bộ màu sắc của các nút món ăn về màu trắng
+            nmrSoluong.Value = 1;
+            // -------------------------------------------------------------------------------------
 
             _selectedTableBtn = sender as Button;
             _selectedTableBtn.BackColor = Color.LightSkyBlue;
@@ -163,6 +267,7 @@ namespace projectWindowform
             _currentFoodName = data.FoodName;
             _currentFoodPrice = data.Price;
         }
+
         private void btnAddFood_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(_currentTableName))
@@ -188,6 +293,52 @@ namespace projectWindowform
             nmrSoluong.Value = 1;
         }
 
+        private void btnSwitchTable_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(_currentTableName))
+            {
+                MessageBox.Show("Vui lòng chọn bàn hiện tại cần chuyển đi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!_orderBLL.HasOrder(_currentTableName))
+            {
+                MessageBox.Show("Bàn hiện tại không có khách ngồi, không thể thực hiện đổi bàn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (cboSwitchTable.SelectedItem == null) return;
+            string targetTableName = cboSwitchTable.SelectedItem.ToString();
+
+            if (targetTableName == _currentTableName)
+            {
+                MessageBox.Show("Bàn đích trùng với bàn hiện tại. Vui lòng chọn một bàn khác!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show($"Xác nhận chuyển toàn bộ các món từ {_currentTableName} sang {targetTableName}?", "Xác nhận đổi bàn", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                try
+                {
+                    _orderBLL.SwitchTable(_currentTableName, targetTableName);
+
+                    MessageBox.Show($"Đã đổi từ {_currentTableName} sang {targetTableName} thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    LoadTableList();
+                    UpdateTableStatus();
+
+                    _currentTableName = "";
+                    _selectedTableBtn = null;
+                    lsvHoadon.Items.Clear();
+                    lblTong.Text = "Tổng tiền: 0 VNĐ";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi trong quá trình đổi bàn: " + ex.Message, "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void btnRemove_Click(object sender, EventArgs e)
         {
             if (lsvHoadon.SelectedItems.Count > 0)
@@ -197,9 +348,17 @@ namespace projectWindowform
                     if (frm.ShowDialog() == DialogResult.OK)
                     {
                         string lyDo = frm.LyDoChon;
-                        string foodName = lsvHoadon.SelectedItems[0].Text;
-                        MessageBox.Show($"Đã xóa món '{foodName}' với lý do: {lyDo}", "Thông báo"); _orderBLL.RemoveFood(_currentTableName, foodName);
-
+                        List<string> selectedFoodNames = new List<string>();
+                        foreach (ListViewItem item in lsvHoadon.SelectedItems)
+                        {
+                            selectedFoodNames.Add(item.Text);
+                        }
+                        foreach (string foodName in selectedFoodNames)
+                        {
+                            _orderBLL.RemoveFood(_currentTableName, foodName);
+                        }
+                        string chuoiMonDaXoa = string.Join(", ", selectedFoodNames);
+                        MessageBox.Show($"Đã xóa các món: '{chuoiMonDaXoa}' với lý do: {lyDo}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (!_orderBLL.HasOrder(_currentTableName))
                         {
                             _selectedTableBtn.Text = _currentTableName + Environment.NewLine + "(Trống)";
@@ -209,13 +368,14 @@ namespace projectWindowform
                         ShowBill(_currentTableName);
                         UpdateTableStatus();
                     }
-                    else
-                    {
-                        MessageBox.Show("Vui lòng chọn một món trên hóa đơn để xóa!", "Thông báo");
-                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn ít nhất một món (hoặc giữ Ctrl để chọn nhiều món) trên hóa đơn để xóa!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
+
         private void btnCheckout_Click(object sender, EventArgs e)
         {
             if (!_orderBLL.HasOrder(_currentTableName)) return;
@@ -224,18 +384,17 @@ namespace projectWindowform
             {
                 try
                 {
-                    _orderBLL.Checkout(_currentTableName,_currentTableId); // BLL tự lo lưu Bill
+                    _orderBLL.Checkout(_currentTableName, _currentTableId);
 
                     _selectedTableBtn.Text = _currentTableName + Environment.NewLine + "(Trống)";
                     _selectedTableBtn.BackColor = Color.LightSkyBlue;
                     ShowBill(_currentTableName);
                     UpdateTableStatus();
-                    MessageBox.Show("Thanh toán thành công!");
+                    MessageBox.Show("Thanh toán thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi khi thanh toán: " + ex.Message, "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Lỗi khi thanh toán: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -250,12 +409,14 @@ namespace projectWindowform
             {
                 ListViewItem lsvItem = new ListViewItem(item.FoodName);
                 lsvItem.SubItems.Add(item.Quantity.ToString());
+                lsvItem.SubItems.Add(item.Price.ToString("N0"));
                 lsvItem.SubItems.Add(item.Total.ToString("N0"));
                 lsvHoadon.Items.Add(lsvItem);
                 totalAmount += item.Total;
             }
             lblTong.Text = "Tổng tiền: " + totalAmount.ToString("N0") + " VNĐ";
         }
+
         private void lnkDangXuat_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if (MessageBox.Show("Xác nhận đăng xuất khỏi hệ thống nhà hàng?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

@@ -1,4 +1,6 @@
 ﻿using projectWindowform.DAL;
+using projectWindowform.DTO;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using tieuluan.DTO;
@@ -70,6 +72,12 @@ namespace tieuluan.DAL
         {
             string query = "SELECT COUNT(DISTINCT TableName) FROM Orders";
             return (int)_db.ExecuteScalar(query, null);
+        }
+
+        public void SwitchTable(string currentTableName, string targetTableName)
+        {
+            string query = "UPDATE Orders SET TableName = @targetTableName WHERE TableName = @currentTableName";
+            _db.ExecuteNonQuery(query, new object[] { targetTableName, currentTableName });
         }
     }
 }

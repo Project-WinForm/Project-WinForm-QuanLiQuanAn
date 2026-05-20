@@ -135,7 +135,7 @@ namespace projectWindowform
 
                 food.TenMon = txtNameFood.Text;
                 food.DanhMucId = Convert.ToInt32(cboCategory.SelectedValue);
-                food.Price = Convert.ToInt32(txtPrice.Text);
+                food.Gia = Convert.ToInt32(txtPrice.Text);
                 food.HinhAnh = imageName;
                 if (cboStatus.Text == "Còn bán")
                 {
@@ -145,7 +145,7 @@ namespace projectWindowform
                 {
                     food.TrangThai = false ;
                 }    
-                if(foodBLL.Insert(food.TenMon, food.Price, food.DanhMucId,food.HinhAnh,food.TrangThai))
+                if(foodBLL.Insert(food.TenMon, food.Gia, food.DanhMucId,food.HinhAnh,food.TrangThai))
                 {
                     MessageBox.Show("Thêm thành công");
                     ResetstatusAdd();
@@ -194,7 +194,7 @@ namespace projectWindowform
                 Food food = new Food();
                 food.TenMon = txtNameFood.Text;
                 food.DanhMucId = Convert.ToInt32(cboCategory.SelectedValue);
-                food.Price = Convert.ToInt32(txtPrice.Text);
+                food.Gia = Convert.ToInt32(txtPrice.Text);
                 food.HinhAnh = imageName;
                 if (cboStatus.Text == "Còn bán")
                 {
@@ -204,7 +204,7 @@ namespace projectWindowform
                 {
                     food.TrangThai = false;
                 }
-                if (foodBLL.Update(selectedFoodId,food.TenMon, food.Price, food.DanhMucId, food.HinhAnh, food.TrangThai))
+                if (foodBLL.Update(selectedFoodId,food.TenMon, food.Gia, food.DanhMucId, food.HinhAnh, food.TrangThai))
                 {
                     MessageBox.Show("Sửa thành công");
                     ResetstatusUpdate();

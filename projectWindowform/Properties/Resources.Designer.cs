@@ -63,6 +63,46 @@ namespace projectWindowform.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ẩn {
+            get {
+                object obj = ResourceManager.GetObject("ẩn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ẩn1 {
+            get {
+                object obj = ResourceManager.GetObject("ẩn1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hiện {
+            get {
+                object obj = ResourceManager.GetObject("hiện", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap hiện1 {
+            get {
+                object obj = ResourceManager.GetObject("hiện1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap z7815713005338_dabb52cdbdac8b58406864113719fe9a {
             get {
                 object obj = ResourceManager.GetObject("z7815713005338_dabb52cdbdac8b58406864113719fe9a", resourceCulture);
