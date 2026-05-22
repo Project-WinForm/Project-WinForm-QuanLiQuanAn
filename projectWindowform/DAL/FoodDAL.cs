@@ -38,6 +38,7 @@ namespace projectWindowform.DAL
             return foods;
         }
 
+
         public bool Insert(string tenMon, decimal gia, int danhMucId, string hinhAnh, bool trangThai)
         {
             string query = "INSERT INTO Foods (TenMon , Gia , DanhMucId , HinhAnh , TrangThai ) VALUES ( @tenMon , @gia , @danhMucId , @hinhAnh , @trangThai )";
