@@ -51,8 +51,8 @@
             this.picFood = new System.Windows.Forms.PictureBox();
             this.btnChooseImg = new System.Windows.Forms.Button();
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
-            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFood)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
@@ -65,9 +65,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(93, 55);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(124, 28);
+            this.label1.Size = new System.Drawing.Size(121, 28);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Name Food: ";
+            this.label1.Text = "Tên món ăn: ";
             // 
             // label2
             // 
@@ -75,9 +75,9 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(93, 94);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 28);
+            this.label2.Size = new System.Drawing.Size(109, 28);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Category: ";
+            this.label2.Text = "Danh mục: ";
             // 
             // label3
             // 
@@ -85,9 +85,9 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(93, 139);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 28);
+            this.label3.Size = new System.Drawing.Size(55, 28);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Price: ";
+            this.label3.Text = "Giá : ";
             // 
             // label4
             // 
@@ -95,9 +95,9 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(93, 184);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 28);
+            this.label4.Size = new System.Drawing.Size(107, 28);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Status: ";
+            this.label4.Text = "Trạng thái: ";
             // 
             // txtNameFood
             // 
@@ -149,7 +149,7 @@
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(98, 42);
             this.btnAdd.TabIndex = 8;
-            this.btnAdd.Text = "Add";
+            this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -163,7 +163,7 @@
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(98, 42);
             this.btnUpdate.TabIndex = 9;
-            this.btnUpdate.Text = "Update";
+            this.btnUpdate.Text = "Sửa";
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
@@ -177,7 +177,7 @@
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(98, 42);
             this.btnDelete.TabIndex = 10;
-            this.btnDelete.Text = "Delete";
+            this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
@@ -191,7 +191,7 @@
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(98, 42);
             this.btnNew.TabIndex = 11;
-            this.btnNew.Text = "New";
+            this.btnNew.Text = "Làm mới";
             this.btnNew.UseVisualStyleBackColor = false;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
@@ -199,16 +199,16 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(60, 410);
+            this.label5.Location = new System.Drawing.Point(60, 364);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(79, 28);
+            this.label5.Size = new System.Drawing.Size(91, 28);
             this.label5.TabIndex = 12;
-            this.label5.Text = "Search: ";
+            this.label5.Text = "Tìm kiếm";
             // 
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(141, 410);
+            this.txtSearch.Location = new System.Drawing.Point(169, 364);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(303, 34);
             this.txtSearch.TabIndex = 13;
@@ -223,11 +223,12 @@
             this.CategoryName,
             this.Price,
             this.Status});
-            this.dgvFood.Location = new System.Drawing.Point(98, 54);
+            this.dgvFood.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvFood.Location = new System.Drawing.Point(0, 32);
             this.dgvFood.Name = "dgvFood";
             this.dgvFood.RowHeadersWidth = 51;
             this.dgvFood.RowTemplate.Height = 24;
-            this.dgvFood.Size = new System.Drawing.Size(886, 195);
+            this.dgvFood.Size = new System.Drawing.Size(1262, 242);
             this.dgvFood.TabIndex = 15;
             this.dgvFood.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFood_CellClick);
             // 
@@ -289,7 +290,7 @@
             this.btnChooseImg.Name = "btnChooseImg";
             this.btnChooseImg.Size = new System.Drawing.Size(168, 36);
             this.btnChooseImg.TabIndex = 17;
-            this.btnChooseImg.Text = "Choose Picture";
+            this.btnChooseImg.Text = "Chọn ảnh";
             this.btnChooseImg.UseVisualStyleBackColor = true;
             this.btnChooseImg.Click += new System.EventHandler(this.btnChooseImage_Click);
             // 
@@ -317,25 +318,10 @@
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(1221, 341);
+            this.uiGroupBox1.Size = new System.Drawing.Size(1262, 341);
             this.uiGroupBox1.TabIndex = 18;
             this.uiGroupBox1.Text = "Food Infomation";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // uiGroupBox2
-            // 
-            this.uiGroupBox2.Controls.Add(this.dgvFood);
-            this.uiGroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.uiGroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiGroupBox2.Location = new System.Drawing.Point(0, 508);
-            this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox2.Name = "uiGroupBox2";
-            this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(1221, 283);
-            this.uiGroupBox2.TabIndex = 19;
-            this.uiGroupBox2.Text = "FoodList";
-            this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCancel
             // 
@@ -347,16 +333,31 @@
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(98, 42);
             this.btnCancel.TabIndex = 18;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = "Huỷ";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // uiGroupBox2
+            // 
+            this.uiGroupBox2.Controls.Add(this.dgvFood);
+            this.uiGroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.uiGroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.uiGroupBox2.Location = new System.Drawing.Point(0, 418);
+            this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox2.Name = "uiGroupBox2";
+            this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox2.Size = new System.Drawing.Size(1262, 373);
+            this.uiGroupBox2.TabIndex = 19;
+            this.uiGroupBox2.Text = "FoodList";
+            this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1221, 791);
+            this.ClientSize = new System.Drawing.Size(1262, 791);
             this.Controls.Add(this.uiGroupBox2);
             this.Controls.Add(this.uiGroupBox1);
             this.Controls.Add(this.txtSearch);

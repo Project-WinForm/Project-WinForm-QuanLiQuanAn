@@ -31,30 +31,68 @@ namespace projectWindowform
 
         private void DinhDangBang()
         {
+            // --- Khung và màu sắc cơ bản ---
             dgvFood.BorderStyle = BorderStyle.None;
             dgvFood.BackgroundColor = Color.White;
+            dgvFood.GridColor = Color.FromArgb(224, 224, 224); // Màu đường kẻ mảnh
+            dgvFood.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal; // Chỉ kẻ ngang cho hiện đại
 
+            // --- Định dạng Tiêu đề (Header) ---
             dgvFood.EnableHeadersVisualStyles = false;
+            dgvFood.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvFood.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue; // Hoặc Color.FromArgb(52, 73, 94) nếu muốn màu tối
+            dgvFood.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvFood.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+            dgvFood.ColumnHeadersHeight = 40; // Tăng chiều cao header cho thoáng
+            dgvFood.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
-            dgvFood.ColumnHeadersDefaultCellStyle.BackColor =
-                Color.FromArgb(52, 73, 94);
+            // --- Định dạng nội dung ô (Cells) ---
+            dgvFood.DefaultCellStyle.Font = new Font("Segoe UI", 10);
+            dgvFood.DefaultCellStyle.SelectionBackColor = Color.DarkTurquoise;
+            dgvFood.DefaultCellStyle.SelectionForeColor = Color.White;
+            dgvFood.RowTemplate.Height = 35; // Hàng cao hơn một chút nhìn sẽ sang hơn
 
-            dgvFood.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
+            // --- Màu dòng xen kẽ (Giống bên Thống kê) ---
+            dgvFood.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
 
-            dgvFood.ColumnHeadersDefaultCellStyle.Font =
-                new Font("Segoe UI", 10, FontStyle.Bold);
+            // --- Căn chỉnh nội dung cột ---
+            // Kiểm tra nếu có cột mới chỉnh, để tránh lỗi NullReference
+            if (dgvFood.Columns.Contains("FoodID"))
+            {
+                dgvFood.Columns["FoodID"].HeaderText = "Mã Món";
+                dgvFood.Columns["FoodID"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
 
-            dgvFood.DefaultCellStyle.Font =
-                new Font("Segoe UI", 10);
+            if (dgvFood.Columns.Contains("FoodName"))
+            {
+                dgvFood.Columns["FoodName"].HeaderText = "Tên Món Ăn";
+            }
 
-            dgvFood.RowTemplate.Height = 30;
+            if (dgvFood.Columns.Contains("CategoryName"))
+            {
+                dgvFood.Columns["CategoryName"].HeaderText = "Danh Mục";
+                dgvFood.Columns["CategoryName"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
 
-            dgvFood.AutoSizeColumnsMode =
-                DataGridViewAutoSizeColumnsMode.Fill;
+            if (dgvFood.Columns.Contains("Price"))
+            {
+                dgvFood.Columns["Price"].HeaderText = "Đơn Giá";
+                dgvFood.Columns["Price"].DefaultCellStyle.Format = "#,### VNĐ"; // Thêm VNĐ như bạn muốn
+                dgvFood.Columns["Price"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dgvFood.Columns["Price"].DefaultCellStyle.ForeColor = Color.Red; // Giá tiền để màu đỏ cho nổi bật
+            }
 
-            dgvFood.SelectionMode =
-                DataGridViewSelectionMode.FullRowSelect;
+            if (dgvFood.Columns.Contains("Status"))
+            {
+                dgvFood.Columns["Status"].HeaderText = "Trạng Thái";
+                dgvFood.Columns["Status"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            // --- Các thiết lập bổ sung ---
+            dgvFood.ReadOnly = true; // Không cho sửa trực tiếp trên bảng
+            dgvFood.AllowUserToAddRows = false; // Bỏ dòng trống cuối bảng
+            dgvFood.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvFood.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
         private void btnChooseImage_Click(object sender, EventArgs e)
         {
