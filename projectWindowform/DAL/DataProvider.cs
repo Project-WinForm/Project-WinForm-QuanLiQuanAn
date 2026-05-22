@@ -5,12 +5,13 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 //Lớp này được thiết kế để xử lý các kết nối và thao tác với cơ sở dữ liệu, chẳng hạn như thực thi các câu truy vấn và truy xuất dữ liệu
 namespace projectWindowform.DAL
 {
     public class DataProvider
     {
-        private string connectionString = "Data Source=LAPTOP-FUTK693G\\SQLEXPRESS;Initial Catalog=QuanLyQuanAn;Integrated Security=True";
+        private string connectionString = "Data Source=localhost;Initial Catalog=QuanLyQuanAn;Integrated Security=True";
 
         public static object Instance { get; internal set; }
 

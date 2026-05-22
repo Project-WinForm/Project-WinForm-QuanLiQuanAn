@@ -67,9 +67,10 @@
             this.label1.Location = new System.Drawing.Point(25, 33);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(68, 25);
+            this.label1.Size = new System.Drawing.Size(52, 25);
             this.label1.TabIndex = 0;
-            this.label1.Text = "From: ";
+            this.label1.Text = "Từ : ";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -78,9 +79,9 @@
             this.label2.Location = new System.Drawing.Point(369, 33);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(47, 25);
+            this.label2.Size = new System.Drawing.Size(59, 25);
             this.label2.TabIndex = 1;
-            this.label2.Text = "To: ";
+            this.label2.Text = "Đến :";
             // 
             // dtFrom
             // 
@@ -140,7 +141,7 @@
             this.btnThongKe.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this.btnThongKe.Size = new System.Drawing.Size(93, 30);
             this.btnThongKe.TabIndex = 5;
-            this.btnThongKe.Text = "Statistics";
+            this.btnThongKe.Text = "Thống kê";
             this.btnThongKe.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.btnThongKe.Click += new System.EventHandler(this.btnThongKe_Click_1);
             // 
@@ -168,14 +169,14 @@
             this.panel_Revenue.Location = new System.Drawing.Point(117, 115);
             this.panel_Revenue.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.panel_Revenue.Name = "panel_Revenue";
-            this.panel_Revenue.Size = new System.Drawing.Size(299, 106);
+            this.panel_Revenue.Size = new System.Drawing.Size(334, 106);
             this.panel_Revenue.TabIndex = 7;
             // 
             // lblTotalRevenue
             // 
             this.lblTotalRevenue.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalRevenue.ForeColor = System.Drawing.Color.Green;
-            this.lblTotalRevenue.Location = new System.Drawing.Point(148, 15);
+            this.lblTotalRevenue.Location = new System.Drawing.Point(154, 12);
             this.lblTotalRevenue.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalRevenue.Name = "lblTotalRevenue";
             this.lblTotalRevenue.Size = new System.Drawing.Size(178, 36);
@@ -191,24 +192,24 @@
             this.lblRevenueTitle.Name = "lblRevenueTitle";
             this.lblRevenueTitle.Size = new System.Drawing.Size(169, 27);
             this.lblRevenueTitle.TabIndex = 0;
-            this.lblRevenueTitle.Text = "Total Revenue:";
+            this.lblRevenueTitle.Text = "Tổng doanh thu: ";
             // 
             // pnlFood
             // 
             this.pnlFood.BackColor = System.Drawing.Color.White;
             this.pnlFood.Controls.Add(this.uiLabel5);
             this.pnlFood.Controls.Add(this.lblFoodTitle);
-            this.pnlFood.Location = new System.Drawing.Point(762, 112);
+            this.pnlFood.Location = new System.Drawing.Point(915, 112);
             this.pnlFood.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pnlFood.Name = "pnlFood";
-            this.pnlFood.Size = new System.Drawing.Size(296, 106);
+            this.pnlFood.Size = new System.Drawing.Size(411, 106);
             this.pnlFood.TabIndex = 8;
             // 
             // uiLabel5
             // 
             this.uiLabel5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.uiLabel5.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.uiLabel5.Location = new System.Drawing.Point(140, 15);
+            this.uiLabel5.Location = new System.Drawing.Point(230, 18);
             this.uiLabel5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.uiLabel5.Name = "uiLabel5";
             this.uiLabel5.Size = new System.Drawing.Size(146, 33);
@@ -219,29 +220,29 @@
             // 
             this.lblFoodTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.lblFoodTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.lblFoodTitle.Location = new System.Drawing.Point(14, 21);
+            this.lblFoodTitle.Location = new System.Drawing.Point(2, 27);
             this.lblFoodTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFoodTitle.Name = "lblFoodTitle";
-            this.lblFoodTitle.Size = new System.Drawing.Size(108, 24);
+            this.lblFoodTitle.Size = new System.Drawing.Size(228, 24);
             this.lblFoodTitle.TabIndex = 0;
-            this.lblFoodTitle.Text = "Total Food Sell: ";
+            this.lblFoodTitle.Text = "Tổng số món ăn đã bán: ";
             // 
             // pnlBill
             // 
             this.pnlBill.BackColor = System.Drawing.Color.White;
             this.pnlBill.Controls.Add(this.lblTotalBill);
             this.pnlBill.Controls.Add(this.lblBillTitle);
-            this.pnlBill.Location = new System.Drawing.Point(447, 112);
+            this.pnlBill.Location = new System.Drawing.Point(505, 112);
             this.pnlBill.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pnlBill.Name = "pnlBill";
-            this.pnlBill.Size = new System.Drawing.Size(290, 106);
+            this.pnlBill.Size = new System.Drawing.Size(320, 106);
             this.pnlBill.TabIndex = 9;
             // 
             // lblTotalBill
             // 
             this.lblTotalBill.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalBill.ForeColor = System.Drawing.Color.Orange;
-            this.lblTotalBill.Location = new System.Drawing.Point(120, 12);
+            this.lblTotalBill.Location = new System.Drawing.Point(153, 12);
             this.lblTotalBill.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTotalBill.Name = "lblTotalBill";
             this.lblTotalBill.Size = new System.Drawing.Size(149, 36);
@@ -255,9 +256,9 @@
             this.lblBillTitle.Location = new System.Drawing.Point(12, 21);
             this.lblBillTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBillTitle.Name = "lblBillTitle";
-            this.lblBillTitle.Size = new System.Drawing.Size(104, 24);
+            this.lblBillTitle.Size = new System.Drawing.Size(165, 24);
             this.lblBillTitle.TabIndex = 0;
-            this.lblBillTitle.Text = "Total Bill: ";
+            this.lblBillTitle.Text = "Tổng hoá đơn: ";
             // 
             // uiBarChart2
             // 
@@ -284,6 +285,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.uiDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.uiDataGridView1.BackgroundColor = System.Drawing.Color.White;
+            this.uiDataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.uiDataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
@@ -302,9 +304,10 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.uiDataGridView1.Enabled = false;
             this.uiDataGridView1.EnableHeadersVisualStyles = false;
             this.uiDataGridView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiDataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.uiDataGridView1.GridColor = System.Drawing.Color.Black;
             this.uiDataGridView1.Location = new System.Drawing.Point(0, 513);
             this.uiDataGridView1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.uiDataGridView1.Name = "uiDataGridView1";
@@ -371,6 +374,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "Form6";
             this.Text = "Form6";
+            this.Load += new System.EventHandler(this.Form6_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel_Revenue.ResumeLayout(false);

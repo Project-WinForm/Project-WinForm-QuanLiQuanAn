@@ -29,7 +29,7 @@ namespace projectWindowform.DAL
 
         public DataTable GetDanhSachHoaDon(object from, object to)
         {
-            string query = @" SELECT b.Id , b.TableId , b.ThoiGianMo , b.ThoiGianDong , b.TongTien FROM Bills b WHERE b.ThoiGianDong BETWEEN @from AND @to";
+            string query = @" SELECT b.Id , t.TenBan AS TenBan , b.ThoiGianMo , b.ThoiGianDong , b.TongTien FROM Bills b JOIN Tables t ON b.TableId = t.Id WHERE b.ThoiGianDong BETWEEN @from AND @to ";
 
             return dp.ExecuteQuery(query, new object[] { from, to });
         }
