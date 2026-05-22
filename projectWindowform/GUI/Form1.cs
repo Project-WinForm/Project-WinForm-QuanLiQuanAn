@@ -1,5 +1,6 @@
 ﻿using projectWindowform.BLL;
 using projectWindowform.DTO;
+using projectWindowform.GUI;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -378,23 +379,46 @@ namespace projectWindowform
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
+            // 1. Kiểm tra xem bàn hiện tại đang chọn có hóa đơn món ăn nào không
             if (!_orderBLL.HasOrder(_currentTableName)) return;
 
-            if (MessageBox.Show($"Thanh toán cho {_currentTableName}?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            // 2. Hiện hộp thoại hỏi xác nhận thanh toán
+            DialogResult dialogResult = MessageBox.Show($"Bạn có chắc chắn muốn thanh toán cho {_currentTableName} không?", "Xác nhận thanh toán", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult == DialogResult.Yes)
             {
                 try
                 {
+                    // Lấy danh sách món ăn hiện tại và tính tổng tiền của bàn này TRƯỚC KHI xóa dữ liệu trong DB
+                    List<OrderItem> currentBill = _orderBLL.GetBill(_currentTableName);
+                    int totalAmount = 0;
+                    foreach (var item in currentBill)
+                    {
+                        totalAmount += item.Total;
+                    }
+
+                    // 3. Khởi tạo Form Hóa Đơn và truyền dữ liệu sang (Tên bàn, Danh sách món, Tổng tiền)
+                    FormHoaDon frmInHD = new FormHoaDon(_currentTableName, currentBill, totalAmount);
+
+                    // Ép Form hóa đơn xuất hiện ngay chính giữa màn hình
+                    frmInHD.StartPosition = FormStartPosition.CenterScreen;
+
+                    // Hiển thị Form hóa đơn lên dạng hộp thoại (User bắt buộc phải xem hoặc ấn In/Đóng mới quay lại Form1 được)
+                    frmInHD.ShowDialog();
+
+                    // 4. Sau khi đóng Form hóa đơn, gọi BLL để xử lý cập nhật CSDL (Lưu doanh thu, xóa bảng tạm)
                     _orderBLL.Checkout(_currentTableName, _currentTableId);
 
+                    // 5. Làm mới lại giao diện hiển thị của bàn vừa thanh toán
                     _selectedTableBtn.Text = _currentTableName + Environment.NewLine + "(Trống)";
-                    _selectedTableBtn.BackColor = Color.LightSkyBlue;
+                    _selectedTableBtn.BackColor = Color.LightGray; // Hoặc màu bàn trống mặc định của bạn
+
                     ShowBill(_currentTableName);
                     UpdateTableStatus();
-                    MessageBox.Show("Thanh toán thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi khi thanh toán: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Lỗi khi xử lý thanh toán và xuất hóa đơn: " + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
