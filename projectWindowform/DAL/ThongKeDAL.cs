@@ -47,5 +47,12 @@ namespace projectWindowform.DAL
 
             return dp.ExecuteQuery(query, new object[] { from, to });
         }
+
+        public DataTable GetChiTietHoaDonDayDu(object from, object to)
+        {
+            string query = @" SELECT b.Id AS [Mã HD] , f.TenMon AS [Tên Món] , bd.SoLuong AS [Số Lượng] , f.Gia AS [Đơn Giá] , (bd.SoLuong * f.Gia) AS [Thành Tiền] , b.ThoiGianDong AS [Ngày Thanh Toán] FROM Bills b  JOIN BillDetails bd ON b.Id = bd.BillId  JOIN Foods f ON bd.FoodId = f.Id WHERE b.ThoiGianDong BETWEEN @from AND @to ORDER BY b.Id ASC";
+
+            return dp.ExecuteQuery(query, new object[] { from, to });
+        }
     }
 }

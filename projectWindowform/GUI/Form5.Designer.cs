@@ -320,7 +320,7 @@
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox1.Size = new System.Drawing.Size(1262, 341);
             this.uiGroupBox1.TabIndex = 18;
-            this.uiGroupBox1.Text = "Food Infomation";
+            this.uiGroupBox1.Text = "Thông tin món ăn: ";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCancel
@@ -349,7 +349,7 @@
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox2.Size = new System.Drawing.Size(1262, 373);
             this.uiGroupBox2.TabIndex = 19;
-            this.uiGroupBox2.Text = "FoodList";
+            this.uiGroupBox2.Text = "Danh sách món ăn: ";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Form5

@@ -4,6 +4,8 @@ using System;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using ClosedXML.Excel;
+
 
 namespace projectWindowform.GUI
 {
@@ -24,43 +26,41 @@ namespace projectWindowform.GUI
 
             try
             {
-                // Định dạng Header và Tên cột
+
+                // 3. ĐỊNH DẠNG HEADER VÀ NỘI DUNG (Giữ nguyên của bạn)
                 uiDataGridView1.Columns["Id"].HeaderText = "Mã HD";
                 uiDataGridView1.Columns["TenBan"].HeaderText = "Bàn";
                 uiDataGridView1.Columns["ThoiGianMo"].HeaderText = "Giờ Mở Hoá Đơn";
                 uiDataGridView1.Columns["ThoiGianDong"].HeaderText = "Giờ Đóng Hoá Đơn";
                 uiDataGridView1.Columns["TongTien"].HeaderText = "Tổng Tiền";
 
-                // Format dữ liệu
+                // Format
                 uiDataGridView1.Columns["ThoiGianMo"].DefaultCellStyle.Format = "HH:mm dd/MM/yyyy";
                 uiDataGridView1.Columns["ThoiGianDong"].DefaultCellStyle.Format = "HH:mm dd/MM/yyyy";
-                uiDataGridView1.Columns["TongTien"].DefaultCellStyle.Format = "#,##0 VNĐ"; 
+                uiDataGridView1.Columns["TongTien"].DefaultCellStyle.Format = "#,##0 VNĐ";
 
-                // Căn lề
-                uiDataGridView1.Columns["Id"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                uiDataGridView1.Columns["TenBan"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                uiDataGridView1.Columns["TongTien"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                uiDataGridView1.Columns["ThoiGianMo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                uiDataGridView1.Columns["ThoiGianDong"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                // Căn lề Center cho tất cả để đẹp hơn
+                foreach (DataGridViewColumn col in uiDataGridView1.Columns)
+                {
+                    col.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                }
 
-                // Tự động dãn cột cho khít khung hình
+                // Tự động dãn cột (Fill sẽ chia đều, nếu muốn thanh cuộn ngang xuất hiện khi cột quá nhiều 
+                // thì hãy đổi Fill thành AllCells)
                 uiDataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-                // --- PHẦN STYLE (Giống như bạn đã làm rất tốt) ---
-                uiDataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
-                uiDataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-                uiDataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // Nên thêm dòng này để chọn cả hàng cho đẹp
-
+                // 4. STYLE GIAO DIỆN
                 uiDataGridView1.BackgroundColor = Color.White;
+                uiDataGridView1.BorderStyle = BorderStyle.None;
                 uiDataGridView1.EnableHeadersVisualStyles = false;
-                uiDataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
                 uiDataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.DodgerBlue;
                 uiDataGridView1.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
                 uiDataGridView1.ColumnHeadersDefaultCellStyle.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-                uiDataGridView1.DefaultCellStyle.Font = new Font("Segoe UI", 10);
-                uiDataGridView1.ReadOnly = true;
-                uiDataGridView1.AllowUserToAddRows = false;
-                uiDataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                uiDataGridView1.ColumnHeadersHeight = 40; // Tăng độ cao Header cho dễ nhìn
+
+                uiDataGridView1.DefaultCellStyle.SelectionBackColor = Color.LightSkyBlue; // Màu khi chọn dòng
+                uiDataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
             }
             catch (Exception ex)
             {
@@ -160,6 +160,90 @@ namespace projectWindowform.GUI
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        public void ExportTongQuat(DataSet ds, string title)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx", FileName = "BaoCaoTongQuat.xlsx" })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (var workbook = new XLWorkbook())
+                    {
+                        // Sheet 1: Thông tin tổng hợp
+                        var wsSummary = workbook.Worksheets.Add("Tong Hop");
+                        wsSummary.Cell(1, 1).Value = title;
+                        wsSummary.Cell(1, 1).Style.Font.Bold = true;
+                        wsSummary.Cell(1, 1).Style.Font.FontSize = 16;
+
+                        // Đổ DataTable Summary vào (bắt đầu từ dòng 3)
+                        wsSummary.Cell(3, 1).InsertTable(ds.Tables["Summary"]);
+
+                        // Sheet 2: Danh sách hóa đơn
+                        var wsBills = workbook.Worksheets.Add("Hoa Don Chi Tiet");
+                        var table = wsBills.Cell(1, 1).InsertTable(ds.Tables["DanhSachHoaDon"]);
+
+                        // Định dạng cột tiền tệ cho cột Tổng Tiền (giả sử là cột số 5)
+                        wsBills.Column(5).Style.NumberFormat.Format = "#,##0 \"VNĐ\"";
+
+                        wsSummary.Columns().AdjustToContents();
+                        wsBills.Columns().AdjustToContents();
+
+                        workbook.SaveAs(sfd.FileName);
+                        MessageBox.Show("Xuất báo cáo tổng quát thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+            }
+        }
+
+        public void ExportChiTiet(DataTable dt)
+        {
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx", FileName = "BaoCaoChiTietMonAn.xlsx" })
+            {
+                if (sfd.ShowDialog() == DialogResult.OK)
+                {
+                    using (var workbook = new XLWorkbook())
+                    {
+                        var worksheet = workbook.Worksheets.Add("Chi Tiet Ban Hang");
+
+                        // Đổ dữ liệu từ DataTable vào Excel
+                        var table = worksheet.Cell(1, 1).InsertTable(dt);
+
+                        // Trang trí: Định dạng tiền tệ cho cột Đơn Giá và Thành Tiền
+                        worksheet.Column(4).Style.NumberFormat.Format = "#,##0"; // Đơn giá
+                        worksheet.Column(5).Style.NumberFormat.Format = "#,##0"; // Thành tiền
+
+                        // Tự động căn chỉnh độ rộng cột
+                        worksheet.Columns().AdjustToContents();
+
+                        workbook.SaveAs(sfd.FileName);
+                        MessageBox.Show("Xuất dữ liệu chi tiết thành công!", "Thông báo");
+                    }
+                }
+            }
+        }
+
+        private void btnExportGeneral_Click(object sender, EventArgs e)
+        {
+            DateTime from = dtFrom.Value;
+            DateTime to = dtTo.Value;
+
+            // Gọi BLL để lấy DataSet (như cấu trúc tôi đã hướng dẫn ở câu trước)
+            DataSet ds = thongKeBLL.GetDuLieuTongQuat(from, to);
+            string title = $"BÁO CÁO DOANH THU TỪ {from:dd/MM/yyyy} ĐẾN {to:dd/MM/yyyy}";
+
+            ExportTongQuat(ds, title);
+        }
+
+        private void btnExportDetail_Click(object sender, EventArgs e)
+        {
+            DateTime from = dtFrom.Value;
+            DateTime to = dtTo.Value;
+
+            // Gọi DAL/BLL lấy bảng chi tiết món ăn
+            DataTable dt = thongKeBLL.GetDuLieuChiTiet(from, to);
+
+            ExportChiTiet(dt);
         }
     }
 }
