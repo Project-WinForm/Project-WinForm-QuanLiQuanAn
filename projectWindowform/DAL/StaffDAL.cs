@@ -50,16 +50,18 @@ namespace projectWindowform.DAL
             return result > 0;
         }
 
-        public bool UpdateStaff(int id, string tenHienThi, string vaiTro)
+        public bool UpdateStaff(int id, string tenDangNhap, string matKhau, string tenHienThi, string vaiTro)  // khai báo 5 biến
         {
-            string query = @" UPDATE Staff SET TenHienThi = @display , VaiTro = @role WHERE Id = @id";
+            string query = "UPDATE Staff SET TenDangNhap = @tenDangNhap , MatKhau = @matKhau , TenHienThi = @tenHienThi , VaiTro = @vaiTro WHERE Id = @id";
 
             int result = dp.ExecuteNonQuery(query,
                 new object[]
                 {
-            tenHienThi,
-            vaiTro,
-            id
+            tenDangNhap, 
+            matKhau,     
+            tenHienThi,  
+            vaiTro,      
+            id           
                 });
 
             return result > 0;

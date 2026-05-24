@@ -8,9 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using Sunny.UI;
+
 namespace projectWindowform.GUI
 {
-    public partial class Form2 : Form
+    public partial class Form2 : UIForm
     {
         public Form2()
         {
@@ -20,26 +22,22 @@ namespace projectWindowform.GUI
         private Form currentFormChild;
 
         // Đổi màu các nút menu khi được chọn
-        private void SetActiveButton(Button checkedButton)
-        {
-            List<Button> menuButtons = new List<Button> { button1, button2, button3 };
 
-            foreach (Button btn in menuButtons)
+        private void SetActiveButton(UIButton checkedButton)
+        {
+            List<UIButton> menuButtons = new List<UIButton>
+    {
+        btnNV,btnFood, btnCS
+
+    };
+
+            foreach (UIButton btn in menuButtons)
             {
-                if (btn == checkedButton)
-                {
-                    // Nút được chọn: Đổi nền xanh, chữ trắng
-                    btn.BackColor = Color.FromArgb(0, 51, 153);
-                    btn.ForeColor = Color.White;
-                }
-                else
-                {
-                    // Nút khác: Trả về nền trắng, chữ đen
-                    btn.BackColor = Color.White;
-                    btn.ForeColor = Color.Black;
-                }
+                btn.Selected = (btn == checkedButton);
             }
         }
+
+
 
         private void OpenChildForm(Form childForm)
         {
@@ -69,31 +67,30 @@ namespace projectWindowform.GUI
             label1.Text = "Form Main ";
         }
 
-        private void panel_Top_Paint(object sender, PaintEventArgs e)
-        {
 
-        }
-       private void button1_Click(object sender, EventArgs e)
+        private void uiButton1_Click(object sender, EventArgs e)
         {
-            SetActiveButton(button1);
+            SetActiveButton(btnNV);
             OpenChildForm(new Form3());
             label1.Text = " Staff Management ";
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
-            SetActiveButton(button2);
-            OpenChildForm( new Form5() );
-            label1.Text = " Food Management ";
-        }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnCS_Click(object sender, EventArgs e)
         {
-            SetActiveButton(button3);
-            OpenChildForm( new Form6() );
+            SetActiveButton(btnCS);
+            OpenChildForm(new Form6());
             label1.Text = "StatisticForm";
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void btnFood_Click(object sender, EventArgs e)
+        {
+
+            SetActiveButton(btnFood);
+            OpenChildForm(new Form5());
+            label1.Text = " Food Management ";
+        }
+
+        private void btnDangXuat_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Xác nhận đăng xuất quyền Quản trị viên?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {

@@ -261,6 +261,8 @@
     <Content Include="Images\e.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Gemini_Generated_Image_lj337blj337blj33.png" />
+    <None Include="Resources\Gemini_Generated_Image_d0rne1d0rne1d0rn.png" />
     <Content Include="Resources\hiện.png" />
     <None Include="Resources\hiện1.png" />
     <Content Include="Resources\ẩn.png" />

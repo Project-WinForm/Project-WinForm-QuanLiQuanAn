@@ -30,12 +30,12 @@
         {
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chkShowPass = new System.Windows.Forms.CheckBox();
             this.btnLoginn = new System.Windows.Forms.Button();
             this.txtPassW = new System.Windows.Forms.TextBox();
             this.txtUserN = new System.Windows.Forms.TextBox();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.chkShowPass = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -63,6 +63,16 @@
             this.groupBox1.Size = new System.Drawing.Size(496, 347);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
+            // 
+            // chkShowPass
+            // 
+            this.chkShowPass.AutoSize = true;
+            this.chkShowPass.Location = new System.Drawing.Point(391, 143);
+            this.chkShowPass.Name = "chkShowPass";
+            this.chkShowPass.Size = new System.Drawing.Size(57, 20);
+            this.chkShowPass.TabIndex = 7;
+            this.chkShowPass.Text = "Hiện";
+            this.chkShowPass.UseVisualStyleBackColor = true;
             // 
             // btnLoginn
             // 
@@ -117,16 +127,6 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // chkShowPass
-            // 
-            this.chkShowPass.AutoSize = true;
-            this.chkShowPass.Location = new System.Drawing.Point(391, 143);
-            this.chkShowPass.Name = "chkShowPass";
-            this.chkShowPass.Size = new System.Drawing.Size(57, 20);
-            this.chkShowPass.TabIndex = 7;
-            this.chkShowPass.Text = "Hiện";
-            this.chkShowPass.UseVisualStyleBackColor = true;
-            // 
             // Form4
             // 
             this.AcceptButton = this.btnLoginn;
@@ -137,7 +137,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             this.Name = "Form4";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form4";

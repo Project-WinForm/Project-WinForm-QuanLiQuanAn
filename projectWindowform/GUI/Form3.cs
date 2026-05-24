@@ -9,116 +9,195 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using projectWindowform.BLL;
 using projectWindowform.DTO;
+using Sunny.UI;
 
 namespace projectWindowform.GUI
 {
-    public partial class Form3 : Form
+    public partial class Form3 : UIForm
     {
+            StaffBLL staffBLL = new StaffBLL();
+            int selectedStaffId = -1;
         public Form3()
         {
             InitializeComponent();
-        }
-        StaffBLL staffBLL = new StaffBLL();
-        int selectedStaffId = -1;
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
+            AllowShowTitle = false;
+            // Thêm dữ liệu vào ComboBox bằng code
+            cboRole.Items.Add("Admin");
+            cboRole.Items.Add("Nhân viên");
+        } 
+        
         private void Form3_Load(object sender, EventArgs e)
         {
-            dgvStaff.DataSource = staffBLL.GetAll();
+            LoadDataGrid();
+          
         }
 
-        private void ResetAddState()
+        private void LoadDataGrid()
         {
-            btnAdd.Text = "Add";
-            btnUpdate.Enabled = true;
-            btnDelete.Enabled = true;
-
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-
-            if (btnAdd.Text == "Add") // LẦN NHẤN THỨ NHẤT
+            try
             {
-                btnAdd.Text = "Save";
-                btnUpdate.Enabled = false;
-                btnDelete.Enabled = false;
+                // Lấy dữ liệu mới nhất thông qua hàm GetAll() của StaffBLL
+                dgvStaff.DataSource = staffBLL.GetAll();
 
-            }
-            else // LẦN NHẤN THỨ HAI (Text đang là "Lưu")
-            {
-                Staff staff = new Staff();
-                staff.TenDangNhap = txtUsername.Text;
-                staff.MatKhau = txtPassword.Text;
-                staff.VaiTro = txtRole.Text;
-                staff.TenHienThi = txtDisplayName.Text;
-                if (staffBLL.Insert(staff))
+                if (dgvStaff.Columns.Count > 0)
                 {
-                    MessageBox.Show("Thêm thành công");
-                    ResetAddState();
-                    dgvStaff.DataSource = staffBLL.GetAll();
+                    // Định dạng Tiếng Việt cho tiêu đề các cột
+                    dgvStaff.Columns["Id"].HeaderText = "Mã Số";
+                    dgvStaff.Columns["TenDangNhap"].HeaderText = "Tên Đăng Nhập";
+                    dgvStaff.Columns["MatKhau"].HeaderText = "Mật Khẩu";
+                    dgvStaff.Columns["TenHienThi"].HeaderText = "Tên Hiển Thị";
+                    dgvStaff.Columns["VaiTro"].HeaderText = "Vai Trò";
+
+                    // Tự động giãn đều khít màn hình rộng rãi
+                    dgvStaff.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message, "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool CheckInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtUsername.Text))
+            {
+                MessageBox.Show("Vui lòng nhập Tên đăng nhập!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtUsername.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtPassword.Text))
+            {
+                MessageBox.Show("Vui lòng nhập Mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtPassword.Focus();
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(txtDisplayName.Text))
+            {
+                MessageBox.Show("Vui lòng nhập Tên hiển thị!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDisplayName.Focus();
+                return false;
+            }
+
+            if (cboRole.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn Vai trò!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboRole.Focus();
+                return false;
+            }
+
+            return true; 
+        }
+
+
+        private void ClearTextBoxes() // Xóa trống nội dung các TextBox
+        {
+            txtUsername.Text = "";   
+            txtPassword.Text = "";
+            txtDisplayName.Text = "";
+
+            cboRole.SelectedIndex = -1;
+
+            txtUsername.Focus();
+        }
+
+        private void btnAdd_Click_1(object sender, EventArgs e)
+        {
+            // Yêu cầu 1: Phải điền đủ dữ liệu mới cho làm việc
+            if (!CheckInput()) return;
+
+            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn THÊM nhân viên này không?",
+                                              "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dr == DialogResult.Yes)
+            {
+                // Đổi thành lớp Staff theo đúng DTO của bạn định nghĩa
+                Staff newStaff = new Staff
+                {
+                    TenDangNhap = txtUsername.Text,
+                    MatKhau = txtPassword.Text,
+                    TenHienThi = txtDisplayName.Text,
+                    VaiTro = cboRole.Text
+                };
+
+                // Yêu cầu 2: Gọi đúng hàm Insert(newStaff) của StaffBLL để thêm dữ liệu thật vào SQL
+                if (staffBLL.Insert(newStaff))
+                {
+                    MessageBox.Show("Thêm nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearTextBoxes(); 
+                    LoadDataGrid();   
                 }
                 else
                 {
-                    MessageBox.Show("Thêm thất bại");
+                    MessageBox.Show("Thêm thất bại! Tên đăng nhập này có thể đã tồn tại.", "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
         }
 
-        private void ResetUpdateState()
+        private void btnUpdate_Click_1(object sender, EventArgs e)
         {
-            btnUpdate.Text = "Update";
-            btnAdd.Enabled = true;
-            btnDelete.Enabled = true;
-            txtUsername.ReadOnly = false;
-            txtPassword.ReadOnly = false;
-            
-        }
-
-        private void btnUpdate_Click(object sender, EventArgs e)
-        {
+            // Kiểm tra xem người dùng đã click chọn dòng nào dưới lưới chưa
             if (selectedStaffId == -1)
             {
-                MessageBox.Show("Vui lòng chọn một nhân viên để sửa!");
+                MessageBox.Show("Vui lòng click chọn nhân viên muốn chỉnh sửa từ danh sách bảng trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (btnUpdate.Text == "Update") // LẦN NHẤN THỨ NHẤT
-            {
-                btnUpdate.Text = "Save";
-                btnAdd.Enabled = false;
-                btnDelete.Enabled = false;
-                txtUsername.ReadOnly = true;
-                txtPassword.ReadOnly = true;
+            if (!CheckInput()) return;
 
-            }
-            else // LẦN NHẤN THỨ HAI (Text đang là "Lưu")
-            {
-                // 1. Lấy dữ liệu từ giao diện
-                Staff nhanviencapnhat = new Staff();
-                nhanviencapnhat.Id = selectedStaffId;
-                nhanviencapnhat.TenHienThi = txtDisplayName.Text;
-                nhanviencapnhat.VaiTro = txtRole.Text;
+            DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn CẬP NHẬT thông tin nhân viên này?",
+                                              "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                // 2. Gọi BLL để cập nhật
-                if (staffBLL.Update(nhanviencapnhat))
+            if (dr == DialogResult.Yes)
+            {
+                Staff updateStaff = new Staff
                 {
-                    MessageBox.Show("Cập nhật thành công!");
+                    Id = selectedStaffId,
+                    TenDangNhap = txtUsername.Text,
+                    MatKhau = txtPassword.Text,
+                    TenHienThi = txtDisplayName.Text,
+                    VaiTro = cboRole.Text
+                };
 
-                    // 3. Khôi phục trạng thái ban đầu
-                    ResetUpdateState();
-
-                    // 4. Load lại dữ liệu
-                    dgvStaff.DataSource = staffBLL.GetAll();
+                // Gọi hàm Update của StaffBLL gửi dữ liệu thay đổi xuống database
+                if (staffBLL.Update(updateStaff))
+                {
+                    MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearTextBoxes();
+                    LoadDataGrid(); // Làm mới lại bảng dữ liệu
                 }
                 else
                 {
-                    MessageBox.Show("Cập nhật thất bại. Vui lòng kiểm tra lại.");
+                    MessageBox.Show("Cập nhật thông tin thất bại!", "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void btnDelete_Click_1(object sender, EventArgs e)
+        {
+            if (selectedStaffId == -1)
+            {
+                MessageBox.Show("Vui lòng click chọn nhân viên muốn xóa từ danh sách bảng trước!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult dr = MessageBox.Show("Hành động này không thể hoàn tác! Bạn có thực sự muốn XÓA nhân viên này không?",
+                                              "Cảnh báo nguy hiểm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (dr == DialogResult.Yes)
+            {
+                // Gọi hàm Delete truyền tham số mã Id đang chọn xuống SQL
+                if (staffBLL.Delete(selectedStaffId))
+                {
+                    MessageBox.Show("Xóa nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearTextBoxes();
+                    LoadDataGrid(); // Refresh lại lưới hiển thị
+                }
+                else
+                {
+                    MessageBox.Show("Xóa nhân viên thất bại!", "Lỗi hệ thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -129,60 +208,14 @@ namespace projectWindowform.GUI
             {
                 DataGridViewRow row = dgvStaff.Rows[e.RowIndex];
 
+                // Lưu lại mã ID của nhân viên đang chọn phục vụ cho Sửa/Xóa
                 selectedStaffId = Convert.ToInt32(row.Cells["Id"].Value);
 
+                // Đẩy thông tin ngược lên ô nhập
                 txtUsername.Text = Convert.ToString(row.Cells["TenDangNhap"].Value);
                 txtPassword.Text = Convert.ToString(row.Cells["MatKhau"].Value);
                 txtDisplayName.Text = Convert.ToString(row.Cells["TenHienThi"].Value);
-                txtRole.Text = Convert.ToString(row.Cells["VaiTro"].Value);
-            }
-        }
-
-        private void ResetDeleteState()
-        {
-            btnDelete.Text = "Delete";
-            btnAdd.Enabled = true;
-            btnUpdate.Enabled = true;   
-            txtUsername.ReadOnly = false;
-            txtPassword.ReadOnly = false;
-            txtDisplayName.ReadOnly = false;
-            txtRole.ReadOnly = false;
-
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (btnDelete.Text == "Delete") 
-            {
-                btnDelete.Text = "Save";
-                btnAdd.Enabled = false;
-                btnUpdate.Enabled = false;
-                txtUsername.ReadOnly = true;
-                txtPassword.ReadOnly = true;
-                txtDisplayName.ReadOnly = true;
-                txtRole.ReadOnly = true;
-
-            }
-            else 
-            {
-                if(selectedStaffId == -1)
-                {
-                    MessageBox.Show("Vui lòng chọn một nhân viên để xóa!");
-                    return;
-                }
-
-                if (staffBLL.Delete(selectedStaffId))
-                {
-                    MessageBox.Show("Xoá thành công!");
-
-                    ResetDeleteState();
-
-                    dgvStaff.DataSource = staffBLL.GetAll();
-                }
-                else
-                {
-                    MessageBox.Show("Xóa thất bại. Vui lòng kiểm tra lại.");
-                }
+                cboRole.Text = Convert.ToString(row.Cells["VaiTro"].Value);
             }
         }
     }

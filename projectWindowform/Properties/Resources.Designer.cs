@@ -83,6 +83,26 @@ namespace projectWindowform.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_d0rne1d0rne1d0rn {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_d0rne1d0rne1d0rn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Gemini_Generated_Image_lj337blj337blj33 {
+            get {
+                object obj = ResourceManager.GetObject("Gemini_Generated_Image_lj337blj337blj33", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hiện {
             get {
                 object obj = ResourceManager.GetObject("hiện", resourceCulture);

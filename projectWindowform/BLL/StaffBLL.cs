@@ -57,7 +57,7 @@ namespace projectWindowform.BLL
 
             return dal.InsertStaff(user.TenDangNhap, user.MatKhau, user.TenHienThi, user.VaiTro);
         }
-       
+
 
         // =========================
         // SỬA NHÂN VIÊN
@@ -67,15 +67,22 @@ namespace projectWindowform.BLL
             if (user.Id <= 0)
                 return false;
 
+            if (string.IsNullOrWhiteSpace(user.TenDangNhap))
+                return false;
+
             if (string.IsNullOrWhiteSpace(user.TenHienThi))
                 return false;
 
-            return dal.UpdateStaff(user.Id, user.TenHienThi, user.VaiTro);
+            if (string.IsNullOrWhiteSpace(user.MatKhau))
+                return false;
+
+            // Gọi chính xác hàm UpdateStaff của DAL với đúng vị trí 5 tham số đã sửa ở trên
+            return dal.UpdateStaff(user.Id, user.TenDangNhap, user.MatKhau, user.TenHienThi, user.VaiTro);
         }
 
-        // =========================
+
         // XOÁ NHÂN VIÊN
-        // =========================
+
         public bool Delete(int id)
         {
             if (id <= 0)
@@ -84,11 +91,9 @@ namespace projectWindowform.BLL
             return dal.DeleteStaff(id);
         }
 
-
-
-        // =========================
+        
         // KIỂM TRA ADMIN
-        // =========================
+
         public bool IsAdmin(string username)
         {
             DataTable user = dal.GetStaff(username);

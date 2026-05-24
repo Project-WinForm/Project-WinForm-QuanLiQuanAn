@@ -28,190 +28,279 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvStaff = new System.Windows.Forms.DataGridView();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnUpdate = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.txtRole = new System.Windows.Forms.TextBox();
-            this.txtDisplayName = new System.Windows.Forms.TextBox();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.txtUsername = new System.Windows.Forms.TextBox();
+            this.txtDisplayName = new Sunny.UI.UITextBox();
+            this.cboRole = new Sunny.UI.UIComboBox();
+            this.txtUsername = new Sunny.UI.UITextBox();
+            this.txtPassword = new Sunny.UI.UITextBox();
+            this.btnDelete = new Sunny.UI.UIButton();
+            this.btnUpdate = new Sunny.UI.UIButton();
+            this.btnAdd = new Sunny.UI.UIButton();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
+            this.dgvStaff = new Sunny.UI.UIDataGridView();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvStaff
-            // 
-            this.dgvStaff.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvStaff.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvStaff.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dgvStaff.GridColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dgvStaff.Location = new System.Drawing.Point(0, 0);
-            this.dgvStaff.Name = "dgvStaff";
-            this.dgvStaff.RowHeadersWidth = 51;
-            this.dgvStaff.RowTemplate.Height = 24;
-            this.dgvStaff.Size = new System.Drawing.Size(1478, 350);
-            this.dgvStaff.TabIndex = 0;
-            this.dgvStaff.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStaff_CellClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.txtDisplayName);
+            this.groupBox1.Controls.Add(this.cboRole);
+            this.groupBox1.Controls.Add(this.txtUsername);
+            this.groupBox1.Controls.Add(this.txtPassword);
             this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.btnUpdate);
             this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Controls.Add(this.txtRole);
-            this.groupBox1.Controls.Add(this.txtDisplayName);
-            this.groupBox1.Controls.Add(this.txtPassword);
-            this.groupBox1.Controls.Add(this.txtUsername);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 375);
+            this.groupBox1.Location = new System.Drawing.Point(0, 382);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1478, 202);
+            this.groupBox1.Size = new System.Drawing.Size(1478, 195);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDelete.Location = new System.Drawing.Point(208, 18);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(112, 181);
-            this.btnDelete.TabIndex = 10;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnUpdate.Location = new System.Drawing.Point(106, 18);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(102, 181);
-            this.btnUpdate.TabIndex = 9;
-            this.btnUpdate.Text = "Update";
-            this.btnUpdate.UseVisualStyleBackColor = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(3, 18);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(103, 181);
-            this.btnAdd.TabIndex = 8;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // txtRole
-            // 
-            this.txtRole.Location = new System.Drawing.Point(1100, 34);
-            this.txtRole.Name = "txtRole";
-            this.txtRole.Size = new System.Drawing.Size(161, 22);
-            this.txtRole.TabIndex = 7;
-            // 
             // txtDisplayName
             // 
-            this.txtDisplayName.Location = new System.Drawing.Point(1100, 100);
+            this.txtDisplayName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtDisplayName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtDisplayName.Location = new System.Drawing.Point(1068, 106);
+            this.txtDisplayName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDisplayName.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtDisplayName.Name = "txtDisplayName";
-            this.txtDisplayName.Size = new System.Drawing.Size(161, 22);
-            this.txtDisplayName.TabIndex = 6;
+            this.txtDisplayName.Padding = new System.Windows.Forms.Padding(5);
+            this.txtDisplayName.ShowText = false;
+            this.txtDisplayName.Size = new System.Drawing.Size(217, 29);
+            this.txtDisplayName.TabIndex = 13;
+            this.txtDisplayName.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtDisplayName.Watermark = "";
             // 
-            // txtPassword
+            // cboRole
             // 
-            this.txtPassword.Location = new System.Drawing.Point(531, 34);
-            this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(182, 22);
-            this.txtPassword.TabIndex = 5;
+            this.cboRole.DataSource = null;
+            this.cboRole.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.cboRole.FillColor = System.Drawing.Color.White;
+            this.cboRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.cboRole.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.cboRole.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.cboRole.Location = new System.Drawing.Point(1068, 53);
+            this.cboRole.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cboRole.MinimumSize = new System.Drawing.Size(63, 0);
+            this.cboRole.Name = "cboRole";
+            this.cboRole.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.cboRole.Size = new System.Drawing.Size(217, 29);
+            this.cboRole.SymbolSize = 24;
+            this.cboRole.TabIndex = 13;
+            this.cboRole.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.cboRole.Watermark = "";
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(531, 103);
+            this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtUsername.Location = new System.Drawing.Point(542, 53);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtUsername.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(182, 22);
-            this.txtUsername.TabIndex = 4;
+            this.txtUsername.Padding = new System.Windows.Forms.Padding(5);
+            this.txtUsername.ShowText = false;
+            this.txtUsername.Size = new System.Drawing.Size(217, 29);
+            this.txtUsername.TabIndex = 12;
+            this.txtUsername.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtUsername.Watermark = "";
+            // 
+            // txtPassword
+            // 
+            this.txtPassword.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtPassword.Location = new System.Drawing.Point(542, 106);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtPassword.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Padding = new System.Windows.Forms.Padding(5);
+            this.txtPassword.ShowText = false;
+            this.txtPassword.Size = new System.Drawing.Size(217, 29);
+            this.txtPassword.TabIndex = 11;
+            this.txtPassword.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtPassword.Watermark = "";
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDelete.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDelete.FillHoverColor = System.Drawing.Color.Red;
+            this.btnDelete.FillPressColor = System.Drawing.Color.Red;
+            this.btnDelete.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnDelete.Location = new System.Drawing.Point(230, 26);
+            this.btnDelete.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(116, 166);
+            this.btnDelete.TabIndex = 10;
+            this.btnDelete.Text = "Xóa";
+            this.btnDelete.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click_1);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnUpdate.FillHoverColor = System.Drawing.Color.Khaki;
+            this.btnUpdate.FillPressColor = System.Drawing.Color.Khaki;
+            this.btnUpdate.FillSelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnUpdate.Location = new System.Drawing.Point(114, 26);
+            this.btnUpdate.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(116, 166);
+            this.btnUpdate.TabIndex = 9;
+            this.btnUpdate.Text = "Sửa";
+            this.btnUpdate.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click_1);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAdd.FillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnAdd.FillPressColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnAdd.FillSelectedColor = System.Drawing.Color.Lime;
+            this.btnAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.btnAdd.Location = new System.Drawing.Point(3, 26);
+            this.btnAdd.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(111, 166);
+            this.btnAdd.TabIndex = 8;
+            this.btnAdd.Text = "Thêm";
+            this.btnAdd.TipsFont = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click_1);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(889, 53);
+            this.label4.Location = new System.Drawing.Point(919, 62);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 16);
+            this.label4.Size = new System.Drawing.Size(69, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Role :";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(889, 106);
+            this.label3.Location = new System.Drawing.Point(849, 115);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 16);
+            this.label3.Size = new System.Drawing.Size(139, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Display Name:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(368, 40);
+            this.label2.Location = new System.Drawing.Point(405, 115);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 16);
+            this.label2.Size = new System.Drawing.Size(109, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "PassWord :";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(368, 109);
+            this.label1.Location = new System.Drawing.Point(405, 62);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 16);
+            this.label1.Size = new System.Drawing.Size(109, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "UserName: ";
             // 
+            // dgvStaff
+            // 
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.dgvStaff.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvStaff.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvStaff.BackgroundColor = System.Drawing.Color.White;
+            this.dgvStaff.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStaff.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.dgvStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvStaff.DefaultCellStyle = dataGridViewCellStyle8;
+            this.dgvStaff.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvStaff.EnableHeadersVisualStyles = false;
+            this.dgvStaff.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.dgvStaff.GridColor = System.Drawing.Color.LightGray;
+            this.dgvStaff.Location = new System.Drawing.Point(0, 35);
+            this.dgvStaff.Name = "dgvStaff";
+            this.dgvStaff.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvStaff.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            this.dgvStaff.RowHeadersWidth = 35;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.dgvStaff.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.dgvStaff.RowTemplate.Height = 24;
+            this.dgvStaff.SelectedIndex = -1;
+            this.dgvStaff.Size = new System.Drawing.Size(1478, 341);
+            this.dgvStaff.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.dgvStaff.TabIndex = 2;
+            this.dgvStaff.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStaff_CellClick);
+            // 
             // Form3
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1478, 577);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvStaff);
+            this.Controls.Add(this.groupBox1);
             this.Name = "Form3";
             this.Text = "Form3";
+            this.ZoomScaleRect = new System.Drawing.Rectangle(19, 19, 1478, 577);
             this.Load += new System.EventHandler(this.Form3_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvStaff;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtUsername;
-        private System.Windows.Forms.TextBox txtRole;
-        private System.Windows.Forms.TextBox txtDisplayName;
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnUpdate;
+        private Sunny.UI.UIDataGridView dgvStaff;
+        private Sunny.UI.UIButton btnDelete;
+        private Sunny.UI.UIButton btnUpdate;
+        private Sunny.UI.UIButton btnAdd;
+        private Sunny.UI.UIComboBox cboRole;
+        private Sunny.UI.UITextBox txtUsername;
+        private Sunny.UI.UITextBox txtPassword;
+        private Sunny.UI.UITextBox txtDisplayName;
     }
 }
