@@ -53,10 +53,12 @@
             this.uiGroupBox1 = new Sunny.UI.UIGroupBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.uiGroupBox2 = new Sunny.UI.UIGroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picFood)).BeginInit();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -199,7 +201,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(60, 364);
+            this.label5.Location = new System.Drawing.Point(66, 34);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 28);
             this.label5.TabIndex = 12;
@@ -208,7 +210,7 @@
             // txtSearch
             // 
             this.txtSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSearch.Location = new System.Drawing.Point(169, 364);
+            this.txtSearch.Location = new System.Drawing.Point(175, 34);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(303, 34);
             this.txtSearch.TabIndex = 13;
@@ -318,7 +320,7 @@
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox1.Size = new System.Drawing.Size(1262, 341);
+            this.uiGroupBox1.Size = new System.Drawing.Size(1262, 304);
             this.uiGroupBox1.TabIndex = 18;
             this.uiGroupBox1.Text = "Thông tin món ăn: ";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -342,26 +344,37 @@
             this.uiGroupBox2.Controls.Add(this.dgvFood);
             this.uiGroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiGroupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.uiGroupBox2.Location = new System.Drawing.Point(0, 418);
+            this.uiGroupBox2.Location = new System.Drawing.Point(0, 510);
             this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(1262, 373);
+            this.uiGroupBox2.Size = new System.Drawing.Size(1262, 247);
             this.uiGroupBox2.TabIndex = 19;
             this.uiGroupBox2.Text = "Danh sách món ăn: ";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.txtSearch);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Location = new System.Drawing.Point(0, 304);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1262, 206);
+            this.groupBox1.TabIndex = 20;
+            this.groupBox1.TabStop = false;
             // 
             // Form5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1262, 791);
+            this.ClientSize = new System.Drawing.Size(1262, 757);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.uiGroupBox2);
             this.Controls.Add(this.uiGroupBox1);
-            this.Controls.Add(this.txtSearch);
-            this.Controls.Add(this.label5);
             this.Name = "Form5";
             this.Text = "Form5";
             this.Load += new System.EventHandler(this.Form5_Load);
@@ -370,8 +383,9 @@
             this.uiGroupBox1.ResumeLayout(false);
             this.uiGroupBox1.PerformLayout();
             this.uiGroupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -402,5 +416,6 @@
         private Sunny.UI.UIGroupBox uiGroupBox1;
         private Sunny.UI.UIGroupBox uiGroupBox2;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

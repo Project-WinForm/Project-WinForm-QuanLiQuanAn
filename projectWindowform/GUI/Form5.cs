@@ -139,7 +139,7 @@ namespace projectWindowform
 
         private void ResetstatusAdd()
         {
-            btnAdd.Text = "Add";
+            btnAdd.Text = "Thêm";
             btnUpdate.Enabled = true;
             btnDelete.Enabled = true;
             txtNameFood.Enabled = false;
@@ -154,9 +154,9 @@ namespace projectWindowform
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if(btnAdd.Text == "Add" )
+            if(btnAdd.Text == "Thêm" )
             {
-                btnAdd.Text = "Save";
+                btnAdd.Text = "Lưu";
                 btnUpdate.Enabled = false;
                 btnDelete.Enabled = false;
                 txtNameFood.Enabled = true;
@@ -169,21 +169,23 @@ namespace projectWindowform
             }
             else
             {
+                string error = foodBLL.KiemTraMonAn(txtNameFood.Text, cboCategory.SelectedValue, txtPrice.Text, cboStatus.Text);
+
+                if (error != "")
+                {
+                    MessageBox.Show(error, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 Food food = new Food();
 
-                food.TenMon = txtNameFood.Text;
+                food.TenMon = txtNameFood.Text.Trim();
                 food.DanhMucId = Convert.ToInt32(cboCategory.SelectedValue);
                 food.Gia = Convert.ToInt32(txtPrice.Text);
                 food.HinhAnh = imageName;
-                if (cboStatus.Text == "Còn bán")
-                {
-                    food.TrangThai = true ;
-                }
-                else
-                {
-                    food.TrangThai = false ;
-                }    
-                if(foodBLL.Insert(food.TenMon, food.Gia, food.DanhMucId,food.HinhAnh,food.TrangThai))
+                food.TrangThai = (cboStatus.Text == "Còn bán");
+
+                if (foodBLL.Insert(food.TenMon, food.Gia, food.DanhMucId,food.HinhAnh,food.TrangThai))
                 {
                     MessageBox.Show("Thêm thành công");
                     ResetstatusAdd();
@@ -200,7 +202,7 @@ namespace projectWindowform
 
         private void ResetstatusUpdate()
         {
-            btnUpdate.Text = "Update";
+            btnUpdate.Text = "Sửa";
             btnAdd.Enabled = true;
             btnDelete.Enabled = true;
             txtNameFood.Enabled = false;
@@ -214,9 +216,9 @@ namespace projectWindowform
         }
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (btnUpdate.Text == "Update")
+            if (btnUpdate.Text == "Sửa")
             {
-                btnUpdate.Text = "Save";
+                btnUpdate.Text = "Lưu";
                 btnAdd.Enabled = false;
                 btnDelete.Enabled = false;
                 txtNameFood.Enabled = true;
@@ -229,19 +231,22 @@ namespace projectWindowform
             }
             else
             {
+                string error = foodBLL.KiemTraMonAn(txtNameFood.Text, cboCategory.SelectedValue, txtPrice.Text, cboStatus.Text);
+
+                if (error != "")
+                {
+                    MessageBox.Show(error, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 Food food = new Food();
-                food.TenMon = txtNameFood.Text;
+
+                food.TenMon = txtNameFood.Text.Trim();
                 food.DanhMucId = Convert.ToInt32(cboCategory.SelectedValue);
                 food.Gia = Convert.ToInt32(txtPrice.Text);
                 food.HinhAnh = imageName;
-                if (cboStatus.Text == "Còn bán")
-                {
-                    food.TrangThai = true;
-                }
-                else
-                {
-                    food.TrangThai = false;
-                }
+                food.TrangThai = (cboStatus.Text == "Còn bán");
+
                 if (foodBLL.Update(selectedFoodId,food.TenMon, food.Gia, food.DanhMucId, food.HinhAnh, food.TrangThai))
                 {
                     MessageBox.Show("Sửa thành công");
@@ -317,8 +322,8 @@ namespace projectWindowform
         private void btnCancel_Click(object sender, EventArgs e)
         {
             // 1. Đưa các nút bấm về trạng thái ban đầu
-            btnAdd.Text = "Add";
-            btnUpdate.Text = "Update";
+            btnAdd.Text = "Thêm";
+            btnUpdate.Text = "Sửa";
 
             btnAdd.Enabled = true;
             btnUpdate.Enabled = true;

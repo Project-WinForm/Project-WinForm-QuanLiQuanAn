@@ -61,6 +61,11 @@ namespace projectWindowform.GUI
 
                 uiDataGridView1.DefaultCellStyle.SelectionBackColor = Color.LightSkyBlue; // Màu khi chọn dòng
                 uiDataGridView1.DefaultCellStyle.SelectionForeColor = Color.Black;
+
+                uiDataGridView1.ReadOnly = true; // Không cho sửa trực tiếp trên bảng
+                uiDataGridView1.AllowUserToAddRows = false; // Bỏ dòng trống cuối bảng
+                uiDataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                uiDataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             }
             catch (Exception ex)
             {

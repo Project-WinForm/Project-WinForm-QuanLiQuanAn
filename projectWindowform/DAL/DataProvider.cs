@@ -11,7 +11,7 @@ namespace projectWindowform.DAL
 {
     public class DataProvider
     {
-        private string connectionString = "Data Source=localhost;Initial Catalog=QuanLyQuanAn;Integrated Security=True";
+        private string connectionString = "Data Source=localhost;Initial Catalog=QuanLyQuanAn;Integrated Security=True;TrustServerCertificate=True";
 
         public static object Instance { get; internal set; }
 

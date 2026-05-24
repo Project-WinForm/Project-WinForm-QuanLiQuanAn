@@ -65,5 +65,45 @@ namespace projectWindowform.BLL
         {
             return foodDAL.SearchFoodByName(name);
         }
+
+        public string KiemTraMonAn(string tenMon, object danhMuc, string giaRaw, object trangThai)
+        {
+            // 1. Kiểm tra Tên món ăn
+            if (string.IsNullOrWhiteSpace(tenMon))
+            {
+                return "Tên món ăn không được để trống!";
+            }
+
+            // 2. Kiểm tra Danh mục
+            if (danhMuc == null || string.IsNullOrEmpty(danhMuc.ToString()))
+            {
+                return "Vui lòng chọn danh mục cho món ăn!";
+            }
+
+            // 3. Kiểm tra Giá (Quan trọng để tránh lỗi format)
+            if (string.IsNullOrWhiteSpace(giaRaw))
+            {
+                return "Giá món ăn không được để trống!";
+            }
+
+            // Thử chuyển đổi chuỗi Giá sang số thực
+            if (!decimal.TryParse(giaRaw, out decimal giaResult))
+            {
+                return "Giá món ăn phải là con số (không chứa chữ cái hay ký tự lạ)!";
+            }
+
+            if (giaResult < 0)
+            {
+                return "Giá món ăn không được là số âm!";
+            }
+
+            // 4. Kiểm tra Trạng thái
+            if (trangThai == null || string.IsNullOrEmpty(trangThai.ToString()))
+            {
+                return "Vui lòng chọn trạng thái món ăn!";
+            }
+
+            return ""; // Mọi thứ đều ổn
+        }
     }
 }

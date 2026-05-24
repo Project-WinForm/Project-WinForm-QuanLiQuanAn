@@ -64,7 +64,7 @@ namespace projectWindowform.GUI
                 currentFormChild.Close();
             }
             SetActiveButton(null);//cho all về cũ
-            label1.Text = "Form Main ";
+            label1.Text = "Form chính ";
         }
 
 
@@ -72,14 +72,14 @@ namespace projectWindowform.GUI
         {
             SetActiveButton(btnNV);
             OpenChildForm(new Form3());
-            label1.Text = " Staff Management ";
+            label1.Text = " Form Quản Lí Nhân Viên ";
         }
 
         private void btnCS_Click(object sender, EventArgs e)
         {
             SetActiveButton(btnCS);
             OpenChildForm(new Form6());
-            label1.Text = "StatisticForm";
+            label1.Text = "Form Thống Kê";
         }
 
         private void btnFood_Click(object sender, EventArgs e)
@@ -87,7 +87,7 @@ namespace projectWindowform.GUI
 
             SetActiveButton(btnFood);
             OpenChildForm(new Form5());
-            label1.Text = " Food Management ";
+            label1.Text = " Form Quản lí đồ ăn ";
         }
 
         private void btnDangXuat_Click(object sender, EventArgs e)
