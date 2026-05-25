@@ -43,7 +43,7 @@ namespace projectWindowform.DAL
 
         public DataTable GetTopMonBanChay(object from, object to)
         {
-            string query = @"SELECT TOP 5 f.TenMon , SUM( bd.SoLuong ) TongBan FROM BillDetails bd INNER JOIN Foods f ON bd.FoodId = f.Id INNER JOIN Bills b ON bd.BillId = b.Id WHERE b.ThoiGianDong BETWEEN @from AND @to GROUP BY f.TenMon ORDER BY TongBan DESC";
+            string query = @"SELECT TOP 4 f.TenMon , SUM( bd.SoLuong ) TongBan FROM BillDetails bd INNER JOIN Foods f ON bd.FoodId = f.Id INNER JOIN Bills b ON bd.BillId = b.Id WHERE b.ThoiGianDong BETWEEN @from AND @to GROUP BY f.TenMon ORDER BY TongBan DESC";
 
             return dp.ExecuteQuery(query, new object[] { from, to });
         }

@@ -123,10 +123,13 @@ namespace projectWindowform
 
             // 2. Gán nguồn dữ liệu cho ComboBox
             cboCategory.DataSource = categories;
+            comboBox1.DataSource = categories;
 
             // 3. Thiết lập cột hiển thị và cột giá trị ẩn
             cboCategory.DisplayMember = "TenDanhMuc"; // Tên thuộc tính hiển thị (chữ)
             cboCategory.ValueMember = "Id";
+            comboBox1.DisplayMember = "TenDanhMuc"; // Tên hiển thị cho người dùng
+            comboBox1.ValueMember = "Id";
             txtNameFood.Enabled = false;
             txtPrice.Enabled = false;
             cboCategory.Enabled = false;
@@ -354,6 +357,28 @@ namespace projectWindowform
             }
 
             MessageBox.Show("Đã hủy thao tác!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedValue == null) return;
+            if (!int.TryParse(comboBox1.SelectedValue.ToString(), out int Id))
+            {
+                return; // Nếu không phải là số thì thoát ra, không làm gì cả
+            }
+            try
+            {
+                
+
+                List<Food> filteredFoods = foodBLL.GetFoodByCategoryID(Id);
+
+                dgvFood.DataSource = filteredFoods;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lọc món ăn: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

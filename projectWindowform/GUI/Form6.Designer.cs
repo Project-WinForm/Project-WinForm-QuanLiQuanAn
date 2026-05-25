@@ -361,7 +361,7 @@
             this.uiDataGridView1.EnableHeadersVisualStyles = false;
             this.uiDataGridView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.uiDataGridView1.GridColor = System.Drawing.Color.Black;
-            this.uiDataGridView1.Location = new System.Drawing.Point(11, 24);
+            this.uiDataGridView1.Location = new System.Drawing.Point(64, 24);
             this.uiDataGridView1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.uiDataGridView1.Name = "uiDataGridView1";
             this.uiDataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -379,7 +379,7 @@
             this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.uiDataGridView1.RowTemplate.Height = 24;
             this.uiDataGridView1.SelectedIndex = -1;
-            this.uiDataGridView1.Size = new System.Drawing.Size(1248, 149);
+            this.uiDataGridView1.Size = new System.Drawing.Size(1248, 181);
             this.uiDataGridView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView1.TabIndex = 12;
             // 

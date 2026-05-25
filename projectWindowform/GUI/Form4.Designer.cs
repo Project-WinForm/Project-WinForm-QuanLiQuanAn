@@ -34,7 +34,6 @@
             this.btnLoginn = new System.Windows.Forms.Button();
             this.txtPassW = new System.Windows.Forms.TextBox();
             this.txtUserN = new System.Windows.Forms.TextBox();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -57,7 +56,6 @@
             this.groupBox1.Controls.Add(this.btnLoginn);
             this.groupBox1.Controls.Add(this.txtPassW);
             this.groupBox1.Controls.Add(this.txtUserN);
-            this.groupBox1.Controls.Add(this.linkLabel1);
             this.groupBox1.Location = new System.Drawing.Point(307, 167);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(496, 347);
@@ -105,16 +103,6 @@
             this.txtUserN.Enter += new System.EventHandler(this.txtUserN_Enter);
             this.txtUserN.Leave += new System.EventHandler(this.txtUserN_Leave);
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(335, 184);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(116, 16);
-            this.linkLabel1.TabIndex = 3;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Forgot Password?";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -154,7 +142,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button btnLoginn;
         private System.Windows.Forms.TextBox txtPassW;
         private System.Windows.Forms.TextBox txtUserN;

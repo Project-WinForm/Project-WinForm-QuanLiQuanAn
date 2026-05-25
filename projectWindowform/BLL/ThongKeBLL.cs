@@ -54,7 +54,7 @@ namespace projectWindowform.BLL
             dtSummary.Rows.Add("Tổng món đã bán",   thongKeDAL.GetTongMon(from, to));
             ds.Tables.Add(dtSummary);
 
-            // 2. Bảng danh sách hóa đơn (lấy từ DAL của bạn)
+            // 2. Bảng danh sách hóa đơn 
             DataTable dtBills = thongKeDAL.GetDanhSachHoaDon(from, to);
             dtBills.TableName = "DanhSachHoaDon";
             ds.Tables.Add(dtBills.Copy());
@@ -62,11 +62,10 @@ namespace projectWindowform.BLL
             return ds;
         }
 
-        // Xuất chi tiết: Cần viết thêm 1 hàm ở DAL để lấy chi tiết từng món trong các hóa đơn
+        // Xuất chi tiết
         public DataTable GetDuLieuChiTiet(DateTime from, DateTime to)
         {
-            // Bạn nên viết thêm 1 hàm DAL.GetChiTietMonAnDaBan(from, to) 
-            // để biết cụ thể mỗi hóa đơn gồm những món gì, số lượng bao nhiêu
+            
             return thongKeDAL.GetChiTietHoaDonDayDu(from, to);
         }
 
